@@ -1,24 +1,32 @@
 package sample;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 public class TraitementImg {
 
-    public void decoupe(String path, int nbPart) throws IOException {
+    /**
+     * Methode permettant le decoupage d'une image, complexité O(n^2) sachant que nous ne depassseront pas 7*7 la complexité totale de ce
+     * cette fonction a une complexité de 60 dans le pire des cas
+     * @param path chemin de l'image
+     * @param nbPart nombre de case voulu
+     * @throws IOException
+     */
+
+    public static void decoupe(String path, int nbPart) throws IOException {
         File file = new File(path);
         System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
         BufferedImage img = ImageIO.read(file);
         int h = img.getHeight();
         int w = img.getWidth();
-        int hPart = (int) (h/Math.sqrt(nbPart));
-        int wPart = (int) (w/Math.sqrt(nbPart));
+        int RnbPart= (int) Math.sqrt(nbPart);
+        int hPart = h/RnbPart;
+        int wPart = w/RnbPart;
         int num= 0;
-        h = (int) (hPart*Math.sqrt(nbPart));
-        w = (int) (wPart*Math.sqrt(nbPart));
+        h = hPart*RnbPart;
+        w = wPart*RnbPart;
         for (int x = 0 ; x< w; x+=wPart){
 
            for (int y = 0; y< h; y+=hPart){
@@ -35,9 +43,5 @@ public class TraitementImg {
            }
         }
 
-    }
-    public static void main (String[] args) throws IOException {
-        TraitementImg t= new TraitementImg();
-        t.decoupe("./src/sample/img.jpg", 9);
     }
 }
