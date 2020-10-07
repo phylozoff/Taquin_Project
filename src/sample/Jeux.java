@@ -2,7 +2,9 @@ package sample;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Jeux implements Serializable {
     String pathImg;
@@ -37,18 +39,21 @@ public class Jeux implements Serializable {
         }
         int nb= 1;
         int sq = (int) Math.sqrt(this.NbCase);
-        for (int i= 1 ; i<nbCase; i++){
+        for (int i= 1 ; i<=nbCase; i++){
             this.grille.add(nb);
             nb++;
         }
+        this.init();
 
     }
     private void determinerCaseVide(){
         this.posVide=(int) ((Math.random()*this.NbCase)+1);
+        this.grille.set(this.posVide, 0);
     }
 
     private void melanger(){
         Collections.shuffle(this.grille);
+        this.posVide= this.grille.indexOf(0);
     }
 
     private void init(){
@@ -145,4 +150,45 @@ public class Jeux implements Serializable {
                 '}';
     }
 
+    public ArrayList<Integer> mouvementPossible(int pos){
+        int cote = (int) Math.sqrt(this.NbCase);
+        // on verifie si on se trouve sur un cote
+        if ( (pos < cote && pos >= 0)){
+            if (pos%cote==0){
+                return (ArrayList<Integer>) Arrays.asList(pos + 1, pos + cote);
+            }
+            else if (pos%cote ==cote-1){
+                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + cote);
+            }
+            else {
+                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + 1, pos + cote);
+            }
+        }
+        else if (pos < this.NbCase && pos >= this.NbCase-cote){
+            if (pos%cote==0){
+                return (ArrayList<Integer>) Arrays.asList(pos + 1, pos - cote);
+            }
+            else if (pos%cote ==cote-1){
+                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos - cote);
+            }
+            else {
+                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + 1, pos - cote);
+            }
+        }
+        else if (pos%cote==0){
+            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos + 1, pos + cote);
+        }
+        else if (pos%cote ==cote-1){
+            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos - 1, pos + cote);
+        }
+        else {
+            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos - 1, pos + 1, pos + cote);
+        }
+
+    }
+    public static void main (String[] args) throws IOException {
+        Jeux j = new Jeux("src/sample/img.jpg", 16);
+
+
+    }
 }
