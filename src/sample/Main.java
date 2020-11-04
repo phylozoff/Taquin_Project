@@ -15,7 +15,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
         Controller controller = loader.getController();
-        controller.setGetHostController(getHostServices());
         primaryStage.setTitle("Taquin");
         Text s = new Text("shots");
         Text n = new Text("0");
