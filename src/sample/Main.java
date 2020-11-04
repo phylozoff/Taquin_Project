@@ -14,7 +14,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
         primaryStage.setTitle("Taquin");
         Text s = new Text("shots");
         Text n = new Text("0");
