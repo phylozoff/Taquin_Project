@@ -33,7 +33,7 @@ public class TraitementImg {
                System.out.println("x: "+x +"  ; y: "+y +" ; h :" +h +" ; w :" +w);
                num++;
                BufferedImage part = img.getSubimage(x,y,wPart,hPart);
-               String sousImg= "Img_"+num+".jpg";
+               String sousImg= "src/images/Img_"+num+".jpg";
                File f = new File(sousImg);
                if (f.createNewFile()) {
                    System.out.println("File created: " + f.getName());

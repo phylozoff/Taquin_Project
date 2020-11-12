@@ -20,7 +20,7 @@ import java.io.IOException;
 public class Controller{
 
     @FXML
-    private Label label;
+    private Label label, nbshots;
     private ToggleButton play;
 
    public void sayHelp(ActionEvent actionEvent) {
@@ -60,6 +60,25 @@ public class Controller{
 
         }
 
+
+    }
+
+    @FXML
+    public void up(ActionEvent actionEvent) {
+
+    }
+
+    public void left(ActionEvent actionEvent) {
+    }
+
+    public void right(ActionEvent actionEvent) {
+    }
+
+    public void down(ActionEvent actionEvent) {
+
+    }
+
+    public void save(ActionEvent actionEvent) {
 
     }
 }
