@@ -54,11 +54,11 @@ public class Controller{
 
     @FXML
     public void playTaquin(ActionEvent actionEvent) {
-        if(play.isSelected()){
+        /*if(play.isSelected()){
 
         }else{
 
-        }
+        }*/
 
 
     }

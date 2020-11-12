@@ -44,10 +44,19 @@ public class Main extends Application {
         Jeux j = new Jeux("src/sample/img.jpg", 16);
         GridPane grid= new GridPane();
         grid.setPadding(new Insets(10,10,10,10));
-        grid.setVgap(8);
-        grid.setHgap(10);
-        Image image = new Image("Img_1.png");
-        for(int i=0; i<j.getGrille().size();i++) {grid.getChildren().add(new ImageView(image));}
+        int taille = (int) Math.sqrt(j.getNbCase());
+        int nombre = 0;
+        String s = null;
+        ImageView iv = null;
+        for(int i=0; i<taille;i++) {
+            for(int k=0; k<taille;k++) {
+                s = "File:src/images/img_"+j.getGrille().get(nombre)+".jpg";
+                iv = new ImageView(new Image(s));
+                GridPane.setConstraints(iv, i, k);
+                grid.getChildren().add(iv);
+                nombre++;
+            }
+        }
         Pane centre = (Pane)scene.lookup("#centre");
         centre.getChildren().add(grid);
 
