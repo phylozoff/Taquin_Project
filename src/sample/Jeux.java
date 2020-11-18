@@ -186,9 +186,4 @@ public class Jeux implements Serializable {
         }
 
     }
-    public static void main (String[] args) throws IOException {
-        Jeux j = new Jeux("src/sample/img.jpg", 16);
-
-
-    }
 }

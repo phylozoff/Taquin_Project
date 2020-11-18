@@ -7,7 +7,7 @@ import java.util.Scanner;
 import static java.lang.Character.toUpperCase;
 import static java.util.Objects.isNull;
 
-public class JeuxConsole extends Jeux implements Runnable{
+public class JeuxConsole extends Jeux{
     public JeuxConsole(String pathSave) {
         super(pathSave);
     }
@@ -46,41 +46,6 @@ public class JeuxConsole extends Jeux implements Runnable{
             this.posVide=posD;
         }
 
-    }
-    @Override
-    public void run() {
-        //boolean affiche=true;
-        Scanner sc;
-        while (true){
-            System.out.println(this.grille.size());
-
-            for (int i=0; i<4; i++){
-                String ligne="| ";
-                for (int k=0; k<4; k++){
-                    //(this.grille.size()== (k+i*4)? this.gr)
-                    ligne += this.grille.get(k+i*4);
-                    //System.out.println(k+i*4);
-                    ligne += " | ";
-                    //System.out.println(ligne);
-                    //ligne="| ";
-                }
-                System.out.println(ligne);
-
-            }
-            sc= new Scanner(System.in);
-            char c = sc.next().charAt(0);
-            if (isNull(verifIn(c))) {
-                System.out.println("erreur");
-            } else {
-                move(c);
-            }
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        JeuxConsole j= new JeuxConsole("src/sample/img.jpg", 16);
-
-        j.run();
     }
 
 
