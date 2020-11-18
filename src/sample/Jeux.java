@@ -153,37 +153,40 @@ public class Jeux implements Serializable {
     public ArrayList<Integer> mouvementPossible(int pos){
         int cote = (int) Math.sqrt(this.NbCase);
         // on verifie si on se trouve sur un cote
+        ArrayList<Integer> a = null;
         if ( (pos < cote && pos >= 0)){
             if (pos%cote==0){
-                return (ArrayList<Integer>) Arrays.asList(pos + 1, pos + cote);
+                a = new ArrayList<>(Arrays.asList(pos + 1, pos + cote));
             }
             else if (pos%cote ==cote-1){
-                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + cote);
+                a = new ArrayList<>(Arrays.asList(pos - 1, pos + cote));
             }
             else {
-                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + 1, pos + cote);
+                a = new ArrayList<>(Arrays.asList(pos - 1, pos + 1, pos + cote));
             }
         }
         else if (pos < this.NbCase && pos >= this.NbCase-cote){
             if (pos%cote==0){
-                return (ArrayList<Integer>) Arrays.asList(pos + 1, pos - cote);
+                a = new ArrayList<>(Arrays.asList(pos + 1, pos - cote));
             }
             else if (pos%cote ==cote-1){
-                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos - cote);
+                a = new ArrayList<>(Arrays.asList(pos - 1, pos - cote));
             }
             else {
-                return (ArrayList<Integer>) Arrays.asList(pos - 1, pos + 1, pos - cote);
+                a = new ArrayList<>(Arrays.asList(pos - 1, pos + 1, pos - cote));
             }
         }
         else if (pos%cote==0){
-            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos + 1, pos + cote);
+            a = new ArrayList<>(Arrays.asList(pos - cote, pos + 1, pos + cote));
         }
         else if (pos%cote ==cote-1){
-            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos - 1, pos + cote);
+            a = new ArrayList<>(Arrays.asList(pos - cote, pos - 1, pos + cote));
         }
         else {
-            return (ArrayList<Integer>) Arrays.asList(pos - cote, pos - 1, pos + 1, pos + cote);
+            a = new ArrayList<>(Arrays.asList(pos - cote, pos - 1, pos + 1, pos + cote));
         }
+
+        return a;
 
     }
 }

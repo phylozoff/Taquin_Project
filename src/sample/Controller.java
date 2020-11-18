@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.Bloom;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -22,6 +23,7 @@ public class Controller{
     @FXML
     private Label label, nbshots;
     private ToggleButton play;
+    private GridPane grille;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -65,20 +67,23 @@ public class Controller{
 
     @FXML
     public void up(ActionEvent actionEvent) {
-
+        Main.getJ().move('Z');
     }
 
     public void left(ActionEvent actionEvent) {
+        Main.getJ().move('Q');
     }
 
     public void right(ActionEvent actionEvent) {
+        Main.getJ().move('D');
     }
 
     public void down(ActionEvent actionEvent) {
+        Main.getJ().move('S');
 
     }
 
     public void save(ActionEvent actionEvent) {
-
+        Main.getJ().save("./src/save");
     }
 }

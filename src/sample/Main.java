@@ -16,6 +16,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private static JeuxConsole j;
+
+    public static JeuxConsole getJ() {
+        return j;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -33,7 +39,7 @@ public class Main extends Application {
         Label timeLabel = (Label)scene.lookup("#label");
         timeLabel.setText("0");
 
-        JeuxConsole j = new JeuxConsole("src/sample/img.jpg", 16);
+        j = new JeuxConsole("src/sample/img.jpg", 16);
         GridPane grid= new GridPane();
         grid.setPadding(new Insets(10,10,10,10));
         int taille = (int) Math.sqrt(j.getNbCase());
@@ -49,6 +55,7 @@ public class Main extends Application {
                 nombre++;
             }
         }
+        grid.setId("grille");
         Pane centre = (Pane)scene.lookup("#centre");
         centre.getChildren().add(grid);
 
