@@ -1,30 +1,16 @@
 package sample;
 
 public class Case {
-    private int x;
-    private int y;
+    private int pos;
     private int cost;
     private int finalCost;
 
-    public Case(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Case(int x) {
+        this.pos = x;
     }
 
     public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+        return pos;
     }
 
     public void setCost(int cost) {

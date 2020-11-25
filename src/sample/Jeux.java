@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Jeux implements Serializable {
     String pathImg;
-    ArrayList<Integer> grille;
+    ArrayList<Case> grille;
     int NbCase;
     int posVide;
     private static final long serialVersionUID = 342836670337066099L;
@@ -40,7 +40,7 @@ public class Jeux implements Serializable {
         int nb= 1;
         int sq = (int) Math.sqrt(this.NbCase);
         for (int i= 1 ; i<=nbCase; i++){
-            this.grille.add(nb);
+            this.grille.add(new Case(nb));
             nb++;
         }
         this.init();
@@ -48,12 +48,12 @@ public class Jeux implements Serializable {
     }
     private void determinerCaseVide(){
         this.posVide=(int) ((Math.random()*this.NbCase)+1);
-        this.grille.set(this.posVide, 0);
+        this.grille.set(this.posVide, new Case(0));
     }
 
     private void melanger(){
         Collections.shuffle(this.grille);
-        this.posVide= this.grille.indexOf(0);
+        this.posVide= this.grille.indexOf(new Case(0));
     }
 
     private void init(){
@@ -112,7 +112,7 @@ public class Jeux implements Serializable {
         return pathImg;
     }
 
-    public ArrayList<Integer> getGrille() {
+    public ArrayList<Case> getGrille() {
         return grille;
     }
 
@@ -128,7 +128,7 @@ public class Jeux implements Serializable {
         this.pathImg = pathImg;
     }
 
-    private void setGrille(ArrayList<Integer> grille) {
+    private void setGrille(ArrayList<Case> grille) {
         this.grille = grille;
     }
 
