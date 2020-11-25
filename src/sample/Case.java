@@ -6,9 +6,14 @@ public class Case {
     private int finalCost;
     private String pathImg;
 
-    public Case(int x, String img) {
+    public Case(int x) {
         this.pos = x;
-        this.pathImg=img;
+        if (pos==0){
+            pathImg=null;
+        }
+        else {
+            pathImg= "src/images/img_"+this.pos+".jpg";
+        }
 
     }
 
