@@ -50,9 +50,10 @@ public class JeuxConsole extends Jeux{
         //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
             Collections.swap(this.grille, posD, posVide);
+            int[] res = {posD, posVide};
             this.posVide=posD;
             nbshots++;
-            return new int[]{posD, posVide};
+            return res;
         }
 
         return new int[0];
