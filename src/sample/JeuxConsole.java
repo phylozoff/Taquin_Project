@@ -47,7 +47,7 @@ public class JeuxConsole extends Jeux{
                 posD=this.posVide++;
                 break;
         }
-        //inverser les deux possition
+        //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
             Collections.swap(this.grille, posD, posVide);
             this.posVide=posD;

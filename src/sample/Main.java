@@ -52,11 +52,13 @@ public class Main extends Application {
         ImageView iv = null;
         for(int i=0; i<taille;i++) {
             for(int k=0; k<taille;k++) {
-                s = "File:src/images/img_"+j.getGrille().get(nombre)+".jpg";
-                iv = new ImageView(new Image(s));
-                GridPane.setConstraints(iv, i, k);
-                grid.getChildren().add(iv);
+                s = j.getGrille().get(nombre).getPathImg();
                 nombre++;
+                if(s!=null) {
+                    iv = new ImageView(new Image(s));
+                    GridPane.setConstraints(iv, i, k);
+                    grid.getChildren().add(iv);
+                }
             }
         }
         grid.setId("grille");

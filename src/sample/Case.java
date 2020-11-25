@@ -4,6 +4,11 @@ public class Case {
     private int pos;
     private int cost;
     private int finalCost;
+
+    public String getPathImg() {
+        return pathImg;
+    }
+
     private String pathImg;
 
     public Case(int x) {
@@ -12,7 +17,7 @@ public class Case {
             pathImg=null;
         }
         else {
-            pathImg= "src/images/img_"+this.pos+".jpg";
+            pathImg= "File:src/images/img_"+this.pos+".jpg";
         }
 
     }

@@ -57,10 +57,10 @@ public class Controller{
     }
 
     @FXML
-    public void playTaquin(ActionEvent actionEvent) {
+    public void playTaquin(ActionEvent actionEvent) throws InterruptedException {
         if(play.isSelected()){
             play.setText("Stop");
-            label.setText("partie en cours");
+            label.setText("partie en cours...");
         }else{
             play.setText("Play");
             label.setText("partie en pause");
