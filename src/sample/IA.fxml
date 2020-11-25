@@ -11,6 +11,6 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="211.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <TextFlow fx:id="instructions" layoutX="14.0" layoutY="36.0" prefHeight="44.0" prefWidth="134.0" />
+      <TextFlow fx:id="instructions" layoutX="39.0" layoutY="28.0" prefHeight="44.0" prefWidth="134.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

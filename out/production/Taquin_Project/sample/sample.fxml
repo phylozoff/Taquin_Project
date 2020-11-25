@@ -10,7 +10,7 @@
 
 <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ToggleButton fx:id="play" layoutX="490.0" layoutY="281.0" mnemonicParsing="false" onAction="#playTaquin" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: lightgreen;" text="New Game">
+      <ToggleButton fx:id="play" layoutX="490.0" layoutY="281.0" mnemonicParsing="false" onAction="#playTaquin" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: lightgreen;" text="Start">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font>
@@ -57,17 +57,17 @@
             <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#up" prefHeight="64.0" prefWidth="36.0" text="^" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#left" prefHeight="35.0" prefWidth="42.0" text="&lt;" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#right" prefHeight="35.0" prefWidth="52.0" text="&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#down" prefHeight="53.0" prefWidth="36.0" text="v" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#up" prefHeight="64.0" prefWidth="36.0" text="^" GridPane.columnIndex="1" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#left" prefHeight="35.0" prefWidth="42.0" text="&lt;" GridPane.rowIndex="1" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#right" prefHeight="35.0" prefWidth="52.0" text="&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#down" prefHeight="53.0" prefWidth="36.0" text="v" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Label alignment="CENTER" layoutX="538.0" layoutY="105.0" prefHeight="17.0" prefWidth="49.0" style="-fx-background-color: lightgray;" text="shots">
+      <Label alignment="CENTER" layoutX="538.0" layoutY="105.0" prefHeight="17.0" prefWidth="49.0" style="-fx-background-color: lightgray; -fx-border-color: black;" text="shots">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font></Label>
-      <Label fx:id="nbshots" alignment="CENTER" layoutX="490.0" layoutY="105.0" prefHeight="17.0" prefWidth="41.0" style="-fx-background-color: lightgray;" text="0" textAlignment="CENTER">
+      <Label fx:id="nbshots" alignment="CENTER" layoutX="490.0" layoutY="105.0" prefHeight="17.0" prefWidth="41.0" style="-fx-background-color: lightgray; -fx-border-color: black;" text="0" textAlignment="CENTER">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font></Label>
@@ -75,7 +75,7 @@
          <padding>
             <Insets top="2.0" />
          </padding></TextFlow>
-      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="10.0" prefHeight="35.0" prefWidth="92.0" style="-fx-border-color: black;" text="0" textAlignment="CENTER">
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="10.0" prefHeight="35.0" prefWidth="92.0" style="-fx-border-color: black;" text="0" textAlignment="CENTER">
          <font>
             <Font name="Bauhaus 93" size="15.0" />
          </font>
@@ -83,24 +83,18 @@
             <Cursor fx:constant="MOVE" />
          </cursor></Label>
       <Pane fx:id="options" layoutX="14.0" layoutY="293.0" prefHeight="93.0" prefWidth="101.0" />
-      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="211.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
         <menus>
-          <Menu mnemonicParsing="false" text="Paramètres">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Stats">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Classement">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+          <Menu mnemonicParsing="false" text="Settings" />
+          <Menu mnemonicParsing="false" text="Stats" />
+          <Menu mnemonicParsing="false" text="Ranking" />
         </menus>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="22.0" />
+         </padding>
       </MenuBar>
       <VBox layoutX="15.0" layoutY="48.0" prefHeight="334.0" prefWidth="98.0" style="-fx-border-color: black;">
          <children>
@@ -122,10 +116,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton mnemonicParsing="false" text="9" />
-                  <RadioButton mnemonicParsing="false" selected="true" text="16" GridPane.columnIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="25" GridPane.rowIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="36" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton mnemonicParsing="false" text="9">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="grilleTaille" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" selected="true" text="16" toggleGroup="$grilleTaille" GridPane.columnIndex="1" />
+                  <RadioButton mnemonicParsing="false" text="25" toggleGroup="$grilleTaille" GridPane.rowIndex="1" />
+                  <RadioButton mnemonicParsing="false" text="36" toggleGroup="$grilleTaille" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
@@ -151,8 +148,11 @@
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="photo" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Photo2" textAlignment="CENTER">
+                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Photo2" textAlignment="CENTER" toggleGroup="$photo">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -160,7 +160,7 @@
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Downloaded" textAlignment="CENTER">
+                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Download..." textAlignment="CENTER" toggleGroup="$photo">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -187,8 +187,11 @@
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="theme" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="B&amp;W">
+                  <RadioButton mnemonicParsing="false" text="B&amp;W" toggleGroup="$theme">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -196,7 +199,7 @@
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Bauhaus93">
+                  <RadioButton mnemonicParsing="false" selected="true" text="Bauhaus93" toggleGroup="$theme">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -208,7 +211,7 @@
             </VBox>
          </children>
       </VBox>
-      <Button alignment="CENTER" layoutX="562.0" layoutY="346.0" mnemonicParsing="false" onAction="#sayHelp" prefHeight="25.0" prefWidth="31.0" text="IA">
+      <Button alignment="CENTER" layoutX="562.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="IA">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font>
