@@ -35,6 +35,7 @@ public class TraitementImg {
                BufferedImage part = img.getSubimage(x,y,wPart,hPart);
                String sousImg= "src/images/img_"+num+".jpg";
                File f = new File(sousImg);
+
                if (f.createNewFile()) {
                    System.out.println("File created: " + f.getName());
                }
