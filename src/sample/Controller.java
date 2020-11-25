@@ -2,11 +2,13 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.Bloom;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -22,8 +24,10 @@ public class Controller{
 
     @FXML
     private Label label, nbshots;
+    @FXML
     private ToggleButton play;
-    private GridPane grille;
+    @FXML
+    private Pane centre;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -56,34 +60,43 @@ public class Controller{
 
     @FXML
     public void playTaquin(ActionEvent actionEvent) {
-        /*if(play.isSelected()){
-
+        if(play.isSelected()){
+            play.setText("Stop");
+            label.setText("partie en cours");
         }else{
-
-        }*/
-
+            play.setText("Play");
+            label.setText("partie en pause");
+        }
 
     }
 
     @FXML
     public void up(ActionEvent actionEvent) {
-        Main.getJ().move('Z');
+        if(play.isSelected()) {
+            Main.getJ().move('Z');
+        }
     }
 
     public void left(ActionEvent actionEvent) {
-        Main.getJ().move('Q');
+        if(play.isSelected()){
+            Main.getJ().move('Q');
+        }
     }
 
     public void right(ActionEvent actionEvent) {
-        Main.getJ().move('D');
+        if(play.isSelected()) {
+            Main.getJ().move('D');
+        }
     }
 
     public void down(ActionEvent actionEvent) {
-        Main.getJ().move('S');
+       if(play.isSelected()) {
+           Main.getJ().move('S');
+       }
 
     }
 
     public void save(ActionEvent actionEvent) {
-        Main.getJ().save("./src/save");
+        Main.getJ().save("Saved");
     }
 }
