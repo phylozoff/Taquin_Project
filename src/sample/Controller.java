@@ -26,8 +26,6 @@ public class Controller{
     private Label label, nbshots;
     @FXML
     private ToggleButton play;
-    @FXML
-    private Pane centre;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -74,26 +72,29 @@ public class Controller{
     public void up(ActionEvent actionEvent) {
         if(play.isSelected()) {
             Main.getJ().move('Z');
+            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
         }
     }
 
     public void left(ActionEvent actionEvent) {
         if(play.isSelected()){
             Main.getJ().move('Q');
+            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
         }
     }
 
     public void right(ActionEvent actionEvent) {
         if(play.isSelected()) {
             Main.getJ().move('D');
+            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
         }
     }
 
     public void down(ActionEvent actionEvent) {
        if(play.isSelected()) {
            Main.getJ().move('S');
+           nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
        }
-
     }
 
     public void save(ActionEvent actionEvent) {
