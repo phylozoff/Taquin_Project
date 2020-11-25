@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <MenuButton contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Menu">
         <items>
@@ -27,7 +27,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </ToggleButton>
-      <StackPane fx:id="centre" layoutX="120.0" layoutY="59.0" prefHeight="322.0" prefWidth="360.0"/>
+      <StackPane fx:id="centre" layoutX="126.0" layoutY="46.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="334.0" prefWidth="348.0" />
       <Button alignment="CENTER" layoutX="14.0" layoutY="225.0" mnemonicParsing="false" onAction="#sayHelp" prefHeight="25.0" prefWidth="100.0" text="Help" />
       <Button alignment="CENTER" layoutX="14.0" layoutY="153.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="100.0" text="Save">
          <effect>
@@ -64,7 +64,7 @@
         <items>
           <MenuItem mnemonicParsing="false" text="Taille" />
           <MenuItem mnemonicParsing="false" text="Image" />
-            <MenuItem mnemonicParsing="false" text="Couleur" />
+            <MenuItem mnemonicParsing="false" text="Thèmes" />
         </items>
       </MenuButton>
       <ProgressIndicator layoutX="518.0" layoutY="54.0" progress="0.0" />

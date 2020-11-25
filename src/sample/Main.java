@@ -42,7 +42,6 @@ public class Main extends Application {
 
         j = new JeuxConsole("src/sample/img.jpg", 16);
         GridPane grid= new GridPane();
-        grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(5);
         grid.setHgap(5);
         int taille = (int) Math.sqrt(j.getNbCase());
@@ -61,9 +60,9 @@ public class Main extends Application {
             }
         }
         grid.setId("grille");
+        grid.setAlignment(Pos.CENTER);
         StackPane centre = (StackPane)scene.lookup("#centre");
         centre.getChildren().add(grid);
-        centre.setAlignment(grid,Pos.CENTER_LEFT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
