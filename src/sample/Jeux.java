@@ -183,7 +183,7 @@ public class Jeux implements Serializable {
             a = new ArrayList<>(Arrays.asList(pos - cote, pos - 1, pos + cote));
         }
         else {
-            a = new ArrayList<>(Arrays.asList(pos - cote, pos - 1, pos + 1, pos + cote));
+            a = new ArrayList<>(Arrays.asList(pos - cote, pos - 1, pos + 1, pos + cote)) ;
         }
 
         return a;

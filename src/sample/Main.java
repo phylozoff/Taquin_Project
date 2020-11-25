@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -42,6 +44,8 @@ public class Main extends Application {
         j = new JeuxConsole("src/sample/img.jpg", 16);
         GridPane grid= new GridPane();
         grid.setPadding(new Insets(10,10,10,10));
+        grid.setVgap(5);
+        grid.setHgap(5);
         int taille = (int) Math.sqrt(j.getNbCase());
         int nombre = 0;
         String s = null;
@@ -56,9 +60,9 @@ public class Main extends Application {
             }
         }
         grid.setId("grille");
-        Pane centre = (Pane)scene.lookup("#centre");
+        StackPane centre = (StackPane)scene.lookup("#centre");
         centre.getChildren().add(grid);
-
+        centre.setAlignment(grid,Pos.CENTER_LEFT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

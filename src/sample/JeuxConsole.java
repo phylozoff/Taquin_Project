@@ -2,18 +2,25 @@ package sample;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Scanner;
 
 import static java.lang.Character.toUpperCase;
-import static java.util.Objects.isNull;
 
 public class JeuxConsole extends Jeux{
+
+    private int nbshots;
+
+    public int getNbshots() {
+        return nbshots;
+    }
+
     public JeuxConsole(String pathSave) {
         super(pathSave);
+        nbshots = 0;
     }
 
     public JeuxConsole(String pathImg, int nbCase) throws IOException {
         super(pathImg, nbCase);
+        nbshots = 0;
     }
 
     public char verifIn(char c){
@@ -44,6 +51,7 @@ public class JeuxConsole extends Jeux{
         if (mouvementPossible(this.posVide).contains(posD)){
             Collections.swap(this.grille, posD, posVide);
             this.posVide=posD;
+            nbshots++;
         }
 
     }
