@@ -27,7 +27,7 @@ public class JeuxConsole extends Jeux{
         c= toUpperCase(c);
         return (c == 'Z' || c== 'Q' || c=='S' || c=='D')? c: null;
     }
-    public void move(char d){
+    public int[] move(char d){
         int posD=-1;
         int cote= (int) Math.sqrt(this.NbCase);
         switch (d){
@@ -52,8 +52,10 @@ public class JeuxConsole extends Jeux{
             Collections.swap(this.grille, posD, posVide);
             this.posVide=posD;
             nbshots++;
+            return new int[]{posD, posVide};
         }
 
+        return new int[0];
     }
 
 
