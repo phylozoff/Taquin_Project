@@ -4,10 +4,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -33,17 +37,21 @@ public class Controller{
     private ToggleButton play;
     @FXML
     private GridPane grille;
+    @FXML
+    private TextField length;
+    @FXML
+    private Pane pane;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
         Parent root = null;
         popUpStage.setTitle("Help");
         try {
-            root = FXMLLoader.load(getClass().getResource("popUp1.fxml"));
+            root = FXMLLoader.load(getClass().getResource("IA.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Text s = new Text("Cliquez sur IA pour vous aider à résoudre le jeu");
+        Text s = new Text("Cliquez sur [IA] pour vous aider à résoudre le jeu.");
         Scene sc = new Scene(root);
         TextFlow txt = (TextFlow) sc.lookup("#instructions");
         txt.getChildren().add(s);
@@ -132,44 +140,62 @@ public class Controller{
     }
 
 
-    private void start() {
-        blinkStop();
-        timerTask = new Task();
-        timer.schedule(timerTask, 1000, 1000);
-    }
-
-    private void pause() {
-        timerTask.cancel();
-        blinkStart();
-    }
-
-    private void resume() {
-        blinkStop();
-        timerTask=new Task(timerTask);
-        timer.schedule(timerTask, 1000, 1000);
-    }
-
-    private void stop() {
-        timerTask.cancel();
-        blinkStop();
-        timer.purge();
-    }
-
-    private void blinkStart() {
-        if ( blinkTask!=null ) {
-            blinkTask.stop();
+    public void nouvelleTaille(ActionEvent actionEvent) {
+        Stage popUpStage = new Stage();
+        Parent root = null;
+        popUpStage.setTitle("Taille");
+        try {
+            root = FXMLLoader.load(getClass().getResource("taille.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        blinkTask = new javax.swing.Timer(1000, e-> label.setVisible(!label.isVisible()));
-        blinkTask.start();
+        Text s = new Text("Veuillez entrer la taille de la nouvelle grille :");
+        Scene sc = new Scene(root);
+        TextFlow txt = (TextFlow) sc.lookup("#phrase");
+        txt.getChildren().add(s);
+        popUpStage.setScene(sc);
+        popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
+        popUpStage.showAndWait();
     }
 
-    private void blinkStop() {
-        if ( blinkTask!=null ) {
-            blinkTask.stop();
-            blinkTask=null;
-            label.setVisible(true);
+    @FXML
+    public void generateGrid(ActionEvent actionEvent) throws IOException {
+        String t = length.getText();
+        if (t != null && !t.isEmpty()) {
+            int length = Integer.parseInt(t);
+            if(Math.sqrt(length)==(int)Math.sqrt(length) && length>=9) {
+                JeuxConsole j2 = new JeuxConsole("src/sample/img.jpg", length);
+                Main.setJ(j2);
+                int taille = (int) Math.sqrt(j2.getNbCase());
+                int nombre = 0;
+                String s = null;
+                ImageView iv = null;
+                for (int i = 0; i < taille; i++) {
+                    for (int k = 0; k < taille; k++) {
+                        s = j2.getGrille().get(nombre).getPathImg();
+                        nombre++;
+                        if (s != null) {
+                            iv = new ImageView(new Image(s));
+                            GridPane.setConstraints(iv, i, k);
+                            grille.getChildren().add(iv);
+                        }
+                    }
+                }
+            }
         }
     }
+
+
+    @FXML
+    public void negative(ActionEvent actionEvent) {
+        pane.setBlendMode(BlendMode.DIFFERENCE);
+    }
+
+    public void applyTheme(ActionEvent actionEvent) {
+
+    }
+
+
     private class Task extends TimerTask {
 
         final long start;
@@ -209,4 +235,46 @@ public class Controller{
         }
 
     };
+
+
+
+    private void start() {
+        blinkStop();
+        timerTask = new Task();
+        timer.schedule(timerTask, 1000, 1000);
+    }
+
+    private void pause() {
+        timerTask.cancel();
+        blinkStart();
+    }
+
+    private void resume() {
+        blinkStop();
+        timerTask=new Task(timerTask);
+        timer.schedule(timerTask, 1000, 1000);
+    }
+
+    private void stop() {
+        timerTask.cancel();
+        blinkStop();
+        timer.purge();
+    }
+
+    private void blinkStart() {
+        if ( blinkTask!=null ) {
+            blinkTask.stop();
+        }
+        blinkTask = new javax.swing.Timer(1000, e-> label.setVisible(!label.isVisible()));
+        blinkTask.start();
+    }
+
+    private void blinkStop() {
+        if ( blinkTask!=null ) {
+            blinkTask.stop();
+            blinkTask=null;
+            label.setVisible(true);
+        }
+    }
+
 }

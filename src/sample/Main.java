@@ -11,11 +11,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
+    public static void setJ(JeuxConsole j) {
+        Main.j = j;
+    }
 
     private static JeuxConsole j;
 
@@ -29,21 +34,16 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Taquin");
-        Text n = new Text("0");
-        Text p = new Text("ValouDu57");
-        Text pseudo = new Text("User name : ");
+        Text pseudo = new Text("ValouDu57");
         Scene scene = new Scene(root, 600, 400);
         TextFlow txt3 = (TextFlow) scene.lookup("#pseudo");
-
-        txt3.getChildren().addAll(pseudo,p);
+        txt3.getChildren().addAll(pseudo);
 
         Label timeLabel = (Label)scene.lookup("#label");
         timeLabel.setText("0:00:00");
 
         j = new JeuxConsole("src/sample/img.jpg", 16);
-        GridPane grid= new GridPane();
-        grid.setVgap(5);
-        grid.setHgap(5);
+        GridPane grid = (GridPane) scene.lookup("#grille");
         int taille = (int) Math.sqrt(j.getNbCase());
         int nombre = 0;
         String s = null;
@@ -59,10 +59,6 @@ public class Main extends Application {
                 }
             }
         }
-        grid.setId("grille");
-        grid.setAlignment(Pos.CENTER);
-        StackPane centre = (StackPane)scene.lookup("#centre");
-        centre.getChildren().add(grid);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
