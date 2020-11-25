@@ -4,12 +4,15 @@ public class Case {
     private int pos;
     private int cost;
     private int finalCost;
+    private String pathImg;
 
-    public Case(int x) {
+    public Case(int x, String img) {
         this.pos = x;
+        this.pathImg=img;
+
     }
 
-    public int getX() {
+    public int getPos() {
         return pos;
     }
 
