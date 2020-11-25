@@ -26,6 +26,8 @@ public class Controller{
     private Label label, nbshots;
     @FXML
     private ToggleButton play;
+    @FXML
+    private GridPane grille;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -71,29 +73,41 @@ public class Controller{
     @FXML
     public void up(ActionEvent actionEvent) {
         if(play.isSelected()) {
-            Main.getJ().move('Z');
+            int[] tabPos = Main.getJ().move('Z');
             nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
+            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+            ImageView iv = new ImageView(new Image(s));
+            grille.setConstraints(iv, 0, 0);
         }
     }
 
     public void left(ActionEvent actionEvent) {
         if(play.isSelected()){
-            Main.getJ().move('Q');
+            int[] tabPos = Main.getJ().move('Q');
             nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
+            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+            ImageView iv = new ImageView(new Image(s));
+            grille.setConstraints(iv, 0, 0);
         }
     }
 
     public void right(ActionEvent actionEvent) {
         if(play.isSelected()) {
-            Main.getJ().move('D');
+            int[] tabPos = Main.getJ().move('D');
             nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
+            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+            ImageView iv = new ImageView(new Image(s));
+            grille.setConstraints(iv, 0, 0);
         }
     }
 
     public void down(ActionEvent actionEvent) {
        if(play.isSelected()) {
-           Main.getJ().move('S');
+           int[] tabPos = Main.getJ().move('S');
            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
+           String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+           ImageView iv = new ImageView(new Image(s));
+           grille.setConstraints(iv, 0, 0);
        }
     }
 
