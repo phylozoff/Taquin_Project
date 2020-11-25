@@ -1,14 +1,13 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -19,9 +18,15 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller{
 
+    private Timer timer = new Timer();
+    private Task timerTask;
+    private javax.swing.Timer blinkTask;
+    private boolean debut=true;
     @FXML
     private Label label, nbshots;
     @FXML
@@ -60,12 +65,18 @@ public class Controller{
 
     @FXML
     public void playTaquin(ActionEvent actionEvent) throws InterruptedException {
-        if(play.isSelected()){
+        if(debut){
             play.setText("Stop");
-            label.setText("partie en cours...");
-        }else{
-            play.setText("Play");
-            label.setText("partie en pause");
+            start();
+            debut=false;
+        }else {
+            if (play.isSelected()) {
+                play.setText("Stop");
+                resume();
+            } else {
+                play.setText("Play");
+                pause();
+            }
         }
 
     }
@@ -78,6 +89,7 @@ public class Controller{
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
             ImageView iv = new ImageView(new Image(s));
             grille.setConstraints(iv, 0, 0);
+            nbshots.setText(""+Main.getJ().getNbshots());
         }
     }
 
@@ -88,6 +100,7 @@ public class Controller{
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
             ImageView iv = new ImageView(new Image(s));
             grille.setConstraints(iv, 0, 0);
+            nbshots.setText(""+Main.getJ().getNbshots());
         }
     }
 
@@ -98,6 +111,7 @@ public class Controller{
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
             ImageView iv = new ImageView(new Image(s));
             grille.setConstraints(iv, 0, 0);
+            nbshots.setText(""+Main.getJ().getNbshots());
         }
     }
 
@@ -108,10 +122,91 @@ public class Controller{
            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
            ImageView iv = new ImageView(new Image(s));
            grille.setConstraints(iv, 0, 0);
+           nbshots.setText(""+Main.getJ().getNbshots());
        }
     }
 
     public void save(ActionEvent actionEvent) {
+        stop();
         Main.getJ().save("Saved");
     }
+
+
+    private void start() {
+        blinkStop();
+        timerTask = new Task();
+        timer.schedule(timerTask, 1000, 1000);
+    }
+
+    private void pause() {
+        timerTask.cancel();
+        blinkStart();
+    }
+
+    private void resume() {
+        blinkStop();
+        timerTask=new Task(timerTask);
+        timer.schedule(timerTask, 1000, 1000);
+    }
+
+    private void stop() {
+        timerTask.cancel();
+        blinkStop();
+        timer.purge();
+    }
+
+    private void blinkStart() {
+        if ( blinkTask!=null ) {
+            blinkTask.stop();
+        }
+        blinkTask = new javax.swing.Timer(1000, e-> label.setVisible(!label.isVisible()));
+        blinkTask.start();
+    }
+
+    private void blinkStop() {
+        if ( blinkTask!=null ) {
+            blinkTask.stop();
+            blinkTask=null;
+            label.setVisible(true);
+        }
+    }
+    private class Task extends TimerTask {
+
+        final long start;
+        private boolean running;
+        public Task() {
+            this(System.currentTimeMillis());
+        }
+        public Task(Task task) {
+            this(task.start);
+        }
+        public Task(long start) {
+            this.start=start;
+        }
+
+        @Override
+        public boolean cancel() {
+            final boolean cancel = super.cancel();
+            running=false;
+            return cancel;
+        }
+
+        public boolean isRunning() {
+            return running;
+        }
+
+        @Override
+        public void run() {
+            running=true;
+            final long time = System.currentTimeMillis() - start;
+            final int seconds = (int) (time / 1000);
+            final String message = String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    label.setText(message);
+                }
+            });
+        }
+
+    };
 }

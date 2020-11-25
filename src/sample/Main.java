@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -39,7 +38,7 @@ public class Main extends Application {
         txt3.getChildren().addAll(pseudo,p);
 
         Label timeLabel = (Label)scene.lookup("#label");
-        timeLabel.setText("0");
+        timeLabel.setText("0:00:00");
 
         j = new JeuxConsole("src/sample/img.jpg", 16);
         GridPane grid= new GridPane();
@@ -72,5 +71,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        System.exit(0);
     }
 }
