@@ -5,6 +5,13 @@ public class Case {
     private int cost;
     private int finalCost;
 
+    @Override
+    public String toString() {
+        return "Case{" +
+                "pos=" + pos +
+                '}';
+    }
+
     public String getPathImg() {
         return pathImg;
     }

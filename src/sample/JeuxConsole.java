@@ -28,6 +28,7 @@ public class JeuxConsole extends Jeux{
         return (c == 'Z' || c== 'Q' || c=='S' || c=='D')? c: null;
     }
     public int[] move(char d){
+        System.out.println(posVide);
         int posD=-1;
         int cote= (int) Math.sqrt(this.NbCase);
         switch (d){
@@ -49,7 +50,11 @@ public class JeuxConsole extends Jeux{
         }
         //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
+            System.out.println(posD);
+            System.out.println(posVide);
+            System.out.println(this.grille.toString());
             Collections.swap(this.grille, posD, posVide);
+            System.out.println(this.grille);
             int[] res = {posD, posVide};
             this.posVide=posD;
             nbshots++;

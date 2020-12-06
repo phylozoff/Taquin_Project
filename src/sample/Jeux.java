@@ -52,12 +52,12 @@ public class Jeux implements Serializable {
 
     private void melanger(){
         Collections.shuffle(this.grille);
-        this.posVide= this.grille.indexOf(new Case(0));
+        //this.posVide= this.grille.indexOf(new Case(0));
     }
 
     private void init(){
-            determinerCaseVide();
             melanger();
+            determinerCaseVide();
     }
 
     public void save(String path){
