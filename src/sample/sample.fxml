@@ -31,7 +31,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <StackPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </StackPane.margin>
             </GridPane>
          </children></StackPane>
@@ -116,13 +116,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton mnemonicParsing="false" text="9">
+                  <RadioButton fx:id="neuf" mnemonicParsing="false" onAction="#generateGrid" text="9">
                      <toggleGroup>
                         <ToggleGroup fx:id="grilleTaille" />
                      </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="16" toggleGroup="$grilleTaille" GridPane.columnIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="25" toggleGroup="$grilleTaille" GridPane.rowIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="36" toggleGroup="$grilleTaille" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="seize" mnemonicParsing="false" onAction="#generateGrid" selected="true" text="16" toggleGroup="$grilleTaille" GridPane.columnIndex="1" />
+                  <RadioButton fx:id="vingtcinq" mnemonicParsing="false" onAction="#generateGrid" text="25" toggleGroup="$grilleTaille" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="trentesix" mnemonicParsing="false" onAction="#generateGrid" text="36" toggleGroup="$grilleTaille" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
@@ -180,7 +180,7 @@
             </Label>
             <VBox prefHeight="83.0" prefWidth="108.0">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Negative">
+                  <RadioButton mnemonicParsing="false" onAction="#negative" text="Negative">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -191,7 +191,7 @@
                         <ToggleGroup fx:id="theme" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="B&amp;W" toggleGroup="$theme">
+                  <RadioButton mnemonicParsing="false" onAction="#pink" text="Pink" toggleGroup="$theme">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -199,7 +199,7 @@
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Bauhaus93" toggleGroup="$theme">
+                  <RadioButton mnemonicParsing="false" onAction="#bauhaus" selected="true" text="Bauhaus93" toggleGroup="$theme">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>

@@ -3,16 +3,15 @@ package sample;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebView;
@@ -22,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,9 +38,9 @@ public class Controller{
     @FXML
     private GridPane grille;
     @FXML
-    private TextField length;
-    @FXML
     private Pane pane;
+    @FXML
+    private RadioButton neuf, seize, vingtcinq, trentesix;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -139,33 +139,68 @@ public class Controller{
         Main.getJ().save("Saved");
     }
 
-
-    public void nouvelleTaille(ActionEvent actionEvent) {
-        Stage popUpStage = new Stage();
-        Parent root = null;
-        popUpStage.setTitle("Taille");
-        try {
-            root = FXMLLoader.load(getClass().getResource("taille.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Text s = new Text("Veuillez entrer la taille de la nouvelle grille :");
-        Scene sc = new Scene(root);
-        TextFlow txt = (TextFlow) sc.lookup("#phrase");
-        txt.getChildren().add(s);
-        popUpStage.setScene(sc);
-        popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
-        popUpStage.showAndWait();
-    }
-
     @FXML
     public void generateGrid(ActionEvent actionEvent) throws IOException {
-        String t = length.getText();
-        if (t != null && !t.isEmpty()) {
-            int length = Integer.parseInt(t);
-            if(Math.sqrt(length)==(int)Math.sqrt(length) && length>=9) {
-                JeuxConsole j2 = new JeuxConsole("src/sample/img.jpg", length);
-                Main.setJ(j2);
+       grille.getChildren().clear();
+       JeuxConsole j2 = null;
+       if(neuf.isSelected()) {
+           j2 = new JeuxConsole("src/sample/img.jpg", 9);
+           Main.setJ(j2);
+           if(grille.getColumnCount()==6){
+               grille.getColumnConstraints().remove(5);
+               grille.getRowConstraints().remove(5);
+           }
+           if(grille.getColumnCount()>=5){
+               grille.getColumnConstraints().remove(4);
+               grille.getRowConstraints().remove(4);
+           }
+           if(grille.getColumnCount()>=4){
+               grille.getColumnConstraints().remove(3);
+               grille.getRowConstraints().remove(3);
+           }
+       }
+       if(seize.isSelected()){
+           j2 = new JeuxConsole("src/sample/img.jpg", 16);
+           Main.setJ(j2);
+           if(grille.getColumnCount()==6){
+               grille.getColumnConstraints().remove(5);
+               grille.getRowConstraints().remove(5);
+           }
+           if(grille.getColumnCount()>=5){
+               grille.getColumnConstraints().remove(4);
+               grille.getRowConstraints().remove(4);
+           }
+           if(grille.getColumnCount()==3){
+               grille.getColumnConstraints().add(new ColumnConstraints());
+               grille.getRowConstraints().add(new RowConstraints());
+           }
+       }
+        if(vingtcinq.isSelected()){
+            j2 = new JeuxConsole("src/sample/img.jpg", 25);
+            Main.setJ(j2);
+            if(grille.getColumnCount()==6){
+                grille.getColumnConstraints().remove(5);
+                grille.getRowConstraints().remove(5);
+            }
+            if(grille.getColumnCount()<5){
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+            }
+        }
+        if(trentesix.isSelected()){
+            j2 = new JeuxConsole("src/sample/img.jpg", 36);
+            Main.setJ(j2);
+            if(grille.getColumnCount()<5){
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+            }
+        }
                 int taille = (int) Math.sqrt(j2.getNbCase());
                 int nombre = 0;
                 String s = null;
@@ -181,8 +216,6 @@ public class Controller{
                         }
                     }
                 }
-            }
-        }
     }
 
 
@@ -191,8 +224,12 @@ public class Controller{
         pane.setBlendMode(BlendMode.DIFFERENCE);
     }
 
-    public void applyTheme(ActionEvent actionEvent) {
+    public void pink(ActionEvent actionEvent) {
+        pane.setBlendMode(BlendMode.GREEN);
+    }
 
+    public void bauhaus(ActionEvent actionEvent) {
+        pane.setBlendMode(BlendMode.SRC_OVER);
     }
 
 
@@ -276,5 +313,8 @@ public class Controller{
             label.setVisible(true);
         }
     }
+
+
+
 
 }
