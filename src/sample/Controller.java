@@ -90,47 +90,54 @@ public class Controller{
     }
 
     @FXML
+    public void bouger(int[] tab){
+        int[] tabPos = tab;
+        String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+        ImageView iv =null;
+        if(s!=null){iv= new ImageView(new Image(s));}
+        int length = grille.getColumnCount();
+        int x =0, y =0;
+        for(int i=2; i<length;i++){
+            if((tabPos[0]+1)/length <1){
+                x=tabPos[0];
+                break;
+            }else if((tabPos[0]+1)/length <i){
+                x=tabPos[0]+1-length*(i-1);
+                y=i-1;
+                break;
+            }
+        }
+        System.out.println(x+"/"+y);
+        grille.setConstraints(iv, y, x);
+        nbshots.setText(""+Main.getJ().getNbshots());
+    }
+
+    @FXML
     public void up(ActionEvent actionEvent) {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('Z');
-            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
-            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-            ImageView iv = new ImageView(new Image(s));
-            grille.setConstraints(iv, 0, 0);
-            nbshots.setText(""+Main.getJ().getNbshots());
+            bouger(tabPos);
         }
     }
 
     public void left(ActionEvent actionEvent) {
         if(play.isSelected()){
             int[] tabPos = Main.getJ().move('Q');
-            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
-            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-            ImageView iv = new ImageView(new Image(s));
-            grille.setConstraints(iv, 0, 0);
-            nbshots.setText(""+Main.getJ().getNbshots());
+            bouger(tabPos);
         }
     }
 
     public void right(ActionEvent actionEvent) {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('D');
-            nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
-            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-            ImageView iv = new ImageView(new Image(s));
-            grille.setConstraints(iv, 0, 0);
-            nbshots.setText(""+Main.getJ().getNbshots());
+            bouger(tabPos);
         }
     }
 
     public void down(ActionEvent actionEvent) {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().move('S');
-           nbshots.setText(String.valueOf(Main.getJ().getNbshots()));
-           String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-           ImageView iv = new ImageView(new Image(s));
-           grille.setConstraints(iv, 0, 0);
-           nbshots.setText(""+Main.getJ().getNbshots());
+           bouger(tabPos);
        }
     }
 
@@ -184,20 +191,26 @@ public class Controller{
             }
             if(grille.getColumnCount()<5){
                 grille.getColumnConstraints().add(new ColumnConstraints());
-                grille.getColumnConstraints().add(new ColumnConstraints());
                 grille.getRowConstraints().add(new RowConstraints());
+            }
+            if(grille.getColumnCount()<4){
+                grille.getColumnConstraints().add(new ColumnConstraints());
                 grille.getRowConstraints().add(new RowConstraints());
             }
         }
         if(trentesix.isSelected()){
             j2 = new JeuxConsole("src/sample/img.jpg", 36);
             Main.setJ(j2);
+            if(grille.getColumnCount()<6){
+                grille.getColumnConstraints().add(new ColumnConstraints());
+                grille.getRowConstraints().add(new RowConstraints());
+            }
             if(grille.getColumnCount()<5){
                 grille.getColumnConstraints().add(new ColumnConstraints());
-                grille.getColumnConstraints().add(new ColumnConstraints());
-                grille.getColumnConstraints().add(new ColumnConstraints());
                 grille.getRowConstraints().add(new RowConstraints());
-                grille.getRowConstraints().add(new RowConstraints());
+            }
+            if(grille.getColumnCount()<4){
+                grille.getColumnConstraints().add(new ColumnConstraints());
                 grille.getRowConstraints().add(new RowConstraints());
             }
         }
