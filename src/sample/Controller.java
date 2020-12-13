@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -125,12 +126,33 @@ public class Controller{
         if(tabPos!=null) {
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
             String s1 = Main.getJ().getGrille().get(tabPos[1]).getPathImg();
-            System.out.println(s + "//////" + s1);
             ImageView iv = new ImageView(new Image(s));
             ImageView iv1 = new ImageView(new Image(s1));
-            System.out.println(tabPos[0] + "/" + tabPos[1]);
-            grille.getChildren().add(tabPos[0], iv);
-            grille.getChildren().add(tabPos[1], iv1);
+            System.out.println(tabPos[0]+"/"+tabPos[1]);
+            int length = grille.getColumnCount();
+            int x =0, y =0, x1=0, y1=0;
+            for(int i=2; i<=length;i++){
+                if((tabPos[0])/length <1){
+                    x=tabPos[0];
+                    break;
+                }else if((tabPos[0])/length <i){
+                    x=tabPos[0]-length*(i-1);
+                    y=i-1;
+                    break;
+                }
+            }
+            for(int i=2; i<=length;i++){
+                if((tabPos[1])/length <1){
+                    x1=tabPos[1];
+                    break;
+                }else if((tabPos[1])/length <i){
+                    x1=tabPos[1]-length*(i-1);
+                    y1=i-1;
+                    break;
+                }
+            }
+            grille.add(iv, x, y);
+            grille.add(iv1, x1, y1);
             nbshots.setText("" + Main.getJ().getNbshots());
             if (progress.getProgress() <= 1) {
                 progress.setProgress(Main.getJ().getNbshots() * 0.02);
