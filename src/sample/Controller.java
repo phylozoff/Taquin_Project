@@ -1,17 +1,16 @@
 package sample;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -23,19 +22,14 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.List;
+import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 public class Controller{
 
@@ -52,7 +46,9 @@ public class Controller{
     @FXML
     private Pane pane;
     @FXML
-    private RadioButton neuf, seize, vingtcinq, trentesix;
+    private AnchorPane ranking;
+    @FXML
+    private RadioButton neuf, seize, vingtcinq, trentesix, photo1, photo2, photo3;
     @FXML
     private TextField pseudo;
     @FXML
@@ -278,21 +274,75 @@ public class Controller{
     }
 
     public void download(ActionEvent actionEvent) throws IOException {
-        JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg"));
-        fc.setAcceptAllFileFilterUsed(false);
-        File f;
-        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
-            f = fc.getSelectedFile();
-        }
+       if(photo3.isSelected()) {
+           JFileChooser fc = new JFileChooser();
+           fc.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg"));
+           fc.setAcceptAllFileFilterUsed(false);
+           File f = null;
+           if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+               f = fc.getSelectedFile();
+           }
+           if (f != null) {
+               changerImage(f.getPath());
+           }
+       }
+       if(photo1.isSelected()){changerImage("src/sample/img.jpg");}
+       if(photo2.isSelected()){}
     }
 
-    public void changerImage(ActionEvent actionEvent){
-
+    public void changerImage(String path) throws IOException {
+       JeuxConsole j3 = null;
+       if(neuf.isSelected()){j3 = new JeuxConsole(path, 9);}
+       if(seize.isSelected()){j3 = new JeuxConsole(path, 16);}
+       if(vingtcinq.isSelected()){j3 = new JeuxConsole(path, 25);}
+       if(trentesix.isSelected()){j3 = new JeuxConsole(path, 36);}
+       Main.setJ(j3);
+        int taille = (int) Math.sqrt(j3.getNbCase());
+        int nombre = 0;
+        String s = null;
+        ImageView iv = null;
+        for(int i=0; i<taille;i++) {
+            for(int k=0; k<taille;k++) {
+                s = j3.getGrille().get(nombre).getPathImg();
+                nombre++;
+                if(s!=null) {
+                    iv = new ImageView(new Image(s));
+                    grille.add(iv,i,k);
+                }
+            }
+        }
     }
 
     public void pseudoChanged(KeyEvent keyEvent) {
         pseudo.setStyle("-fx-border-color : green");
+    }
+
+    public void rank(ActionEvent actionevent) throws SQLException {
+        Stage popUpStage = new Stage();
+        Parent root = null;
+        popUpStage.setTitle("Stats");
+        try {
+            root = FXMLLoader.load(getClass().getResource("rank.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TableView<String> tableView = new TableView();
+        TreeMap<String, Integer> tm = JDBC.classement();
+
+        tableView.getItems().addAll(tm.keySet());
+
+        TableColumn<String, String> keyColumn = new TableColumn<>("key");
+        keyColumn.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue()));
+        TableColumn<String, String> valueColumn = new TableColumn<>("value");
+        valueColumn.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue()));
+
+        tableView.getColumns().addAll(keyColumn, valueColumn);
+        Scene sc = new Scene(root);
+        ranking.getChildren().add(tableView);
+        popUpStage.setScene(sc);
+        popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
+        popUpStage.showAndWait();
     }
 
 

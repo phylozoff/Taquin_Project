@@ -115,7 +115,5 @@ public class JDBC {
     public static void main(String[] args) throws SQLException {
         JDBC.getConnexion();
         JDBC.addPartie("test", 99);
-
-
     }
 }

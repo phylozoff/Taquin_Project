@@ -71,7 +71,7 @@
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font></Label>
-      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="10.0" prefHeight="35.0" prefWidth="92.0" style="-fx-border-color: black;" text="0" textAlignment="CENTER">
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="10.0" prefHeight="35.0" prefWidth="128.0" style="-fx-border-color: black;" text="0" textAlignment="CENTER">
          <font>
             <Font name="Bauhaus 93" size="15.0" />
          </font>
@@ -79,19 +79,6 @@
             <Cursor fx:constant="MOVE" />
          </cursor></Label>
       <Pane fx:id="options" layoutX="14.0" layoutY="293.0" prefHeight="93.0" prefWidth="101.0" />
-      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="211.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
-        <menus>
-          <Menu mnemonicParsing="false" text="Settings" />
-          <Menu mnemonicParsing="false" text="Stats" />
-          <Menu mnemonicParsing="false" text="Ranking" />
-        </menus>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="22.0" />
-         </padding>
-      </MenuBar>
       <VBox layoutX="15.0" layoutY="48.0" prefHeight="334.0" prefWidth="98.0" style="-fx-border-color: black;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="111.0" style="-fx-background-color: lightgray;" text="Length" textAlignment="CENTER">
@@ -137,7 +124,7 @@
             </Label>
             <VBox prefHeight="84.0" prefWidth="108.0">
                <children>
-                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" onAction="#changerImage" prefHeight="27.0" prefWidth="109.0" selected="true" text="Photo1" textAlignment="CENTER">
+                  <RadioButton fx:id="photo1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#download" prefHeight="27.0" prefWidth="109.0" selected="true" text="Photo1" textAlignment="CENTER">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -148,7 +135,7 @@
                         <ToggleGroup fx:id="photo" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Photo2" textAlignment="CENTER" toggleGroup="$photo">
+                  <RadioButton fx:id="photo2" contentDisplay="CENTER" mnemonicParsing="false" onAction="#download" prefHeight="27.0" prefWidth="109.0" text="Photo2" textAlignment="CENTER" toggleGroup="$photo">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -156,7 +143,7 @@
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </RadioButton>
-                  <RadioButton contentDisplay="CENTER" mnemonicParsing="false" onAction="#download" prefHeight="27.0" prefWidth="109.0" text="Download..." textAlignment="CENTER" toggleGroup="$photo">
+                  <RadioButton fx:id="photo3" contentDisplay="CENTER" mnemonicParsing="false" onAction="#download" prefHeight="27.0" prefWidth="109.0" text="Download..." textAlignment="CENTER" toggleGroup="$photo">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
@@ -214,5 +201,8 @@
       </Button>
       <ProgressBar fx:id="progress" layoutX="491.0" layoutY="100.0" opacity="0.72" prefHeight="18.0" prefWidth="101.0" progress="0.0" style="-fx-accent: green;" />
       <TextField fx:id="pseudo" layoutX="376.0" layoutY="15.0" onKeyPressed="#pseudoChanged" prefHeight="25.0" prefWidth="217.0" />
+      <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Settings" />
+      <Button layoutX="105.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="Stats" />
+      <Button layoutX="164.0" layoutY="15.0" mnemonicParsing="false" onAction="#rank" text="Ranking" />
    </children>
 </Pane>

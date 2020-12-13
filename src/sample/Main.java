@@ -51,8 +51,7 @@ public class Main extends Application {
                 nombre++;
                 if(s!=null) {
                     iv = new ImageView(new Image(s));
-                    GridPane.setConstraints(iv, i, k);
-                    grid.getChildren().add(iv);
+                    grid.add(iv,i,k);
                 }
             }
         }
