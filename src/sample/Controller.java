@@ -1,16 +1,18 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -20,7 +22,17 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,6 +53,10 @@ public class Controller{
     private Pane pane;
     @FXML
     private RadioButton neuf, seize, vingtcinq, trentesix;
+    @FXML
+    private TextField pseudo;
+    @FXML
+    private ProgressBar progress;
 
    public void sayHelp(ActionEvent actionEvent) {
         Stage popUpStage = new Stage();
@@ -73,19 +89,37 @@ public class Controller{
 
     @FXML
     public void playTaquin(ActionEvent actionEvent) throws InterruptedException {
-        if(debut){
-            play.setText("Stop");
-            start();
-            debut=false;
-        }else {
-            if (play.isSelected()) {
-                play.setText("Stop");
-                resume();
-            } else {
-                play.setText("Play");
-                pause();
-            }
-        }
+           if(debut){
+               if(pseudo.getText().equals("")){
+                   pseudo.setStyle("-fx-border-color : red");
+                   Stage popUpStage = new Stage();
+                   Parent root = null;
+                   popUpStage.setTitle("[!]");
+                   try {
+                       root = FXMLLoader.load(getClass().getResource("pseudoPopUp.fxml"));
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+                   Text s = new Text("Veuillez entrer votre pseudonyme dans la case en haut à droite.");
+                   Scene sc = new Scene(root);
+                   TextFlow txt = (TextFlow) sc.lookup("#instructions");
+                   txt.getChildren().add(s);
+                   popUpStage.setScene(sc);
+                   popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
+                   popUpStage.showAndWait();
+               }
+               play.setText("Stop");
+               start();
+               debut = false;
+           }else {
+               if (play.isSelected()) {
+                   play.setText("Stop");
+                   resume();
+               } else {
+                   play.setText("Play");
+                   pause();
+               }
+           }
 
     }
 
@@ -93,23 +127,22 @@ public class Controller{
     public void bouger(int[] tab){
         int[] tabPos = tab;
         String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-        ImageView iv =null;
-        if(s!=null){iv= new ImageView(new Image(s));}
-        int length = grille.getColumnCount();
-        int x =0, y =0;
-        for(int i=2; i<length;i++){
-            if((tabPos[0]+1)/length <1){
-                x=tabPos[0];
-                break;
-            }else if((tabPos[0]+1)/length <i){
-                x=tabPos[0]+1-length*(i-1);
-                y=i-1;
-                break;
-            }
-        }
-        System.out.println(x+"/"+y);
-        grille.setConstraints(iv, y, x);
+        ImageView iv = null;
+        if(s!=null){iv=new ImageView(new Image(s));}
+        System.out.println(tabPos[0]+"/"+tabPos[1]);
+        grille.getChildren().add(tabPos[0], iv);
+        grille.getChildren().remove(tabPos[1]);
         nbshots.setText(""+Main.getJ().getNbshots());
+        if(progress.getProgress()<=1){progress.setProgress(Main.getJ().getNbshots()*0.02);}
+        if(progress.getProgress()>0.3&&progress.getProgress()<0.6){
+            progress.setStyle("-fx-accent : orange");
+        }
+        if(progress.getProgress()>=0.6){
+            progress.setStyle("-fx-accent : red");
+        }
+        if(progress.getProgress()==1){
+            progress.setStyle("-fx-accent : black");
+        }
     }
 
     @FXML
@@ -178,8 +211,7 @@ public class Controller{
                grille.getRowConstraints().remove(4);
            }
            if(grille.getColumnCount()==3){
-               grille.getColumnConstraints().add(new ColumnConstraints());
-               grille.getRowConstraints().add(new RowConstraints());
+
            }
        }
         if(vingtcinq.isSelected()){
@@ -243,6 +275,24 @@ public class Controller{
 
     public void bauhaus(ActionEvent actionEvent) {
         pane.setBlendMode(BlendMode.SRC_OVER);
+    }
+
+    public void download(ActionEvent actionEvent) throws IOException {
+        JFileChooser fc = new JFileChooser();
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg"));
+        fc.setAcceptAllFileFilterUsed(false);
+        File f;
+        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+            f = fc.getSelectedFile();
+        }
+    }
+
+    public void changerImage(ActionEvent actionEvent){
+
+    }
+
+    public void pseudoChanged(KeyEvent keyEvent) {
+        pseudo.setStyle("-fx-border-color : green");
     }
 
 

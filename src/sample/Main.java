@@ -34,10 +34,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Taquin");
-        Text pseudo = new Text("ValouDu57");
         Scene scene = new Scene(root, 600, 400);
-        TextFlow txt3 = (TextFlow) scene.lookup("#pseudo");
-        txt3.getChildren().addAll(pseudo);
 
         Label timeLabel = (Label)scene.lookup("#label");
         timeLabel.setText("0:00:00");
