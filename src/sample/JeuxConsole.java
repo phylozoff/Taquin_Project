@@ -50,19 +50,25 @@ public class JeuxConsole extends Jeux{
         }
         //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
-            System.out.println(posD);
-            System.out.println(posVide);
-            System.out.println(this.grille.toString());
+            System.out.println("mouvement possible :"+mouvementPossible(this.posVide));
+            System.out.println("position deplacement :"+posD);
+            System.out.println("position vide :"+posVide);
+            //System.out.println(this.grille.toString());
+
+
             Collections.swap(this.grille, posD, posVide);
-            System.out.println(this.grille);
+            //System.out.println(this.grille);
             int[] res = {posD, posVide};
+            System.out.println("position res :"+res);
             this.posVide=posD;
+            System.out.println("position vide :"+posVide);
             nbshots++;
             return res;
         }
 
-        return new int[0];
+        return null;
     }
+
 
 
 }

@@ -46,7 +46,7 @@ public class Jeux implements Serializable {
 
     }
     private void determinerCaseVide(){
-        this.posVide=(int) ((Math.random()*this.NbCase)+1);
+        this.posVide=this.NbCase-1;
         this.grille.set(this.posVide, new Case(0));
     }
 
