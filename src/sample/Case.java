@@ -21,7 +21,7 @@ public class Case {
     public Case(int x) {
         this.pos = x;
         if (pos==0){
-            pathImg=null;
+            pathImg="File:src/images/img_null_d.jpg";
         }
         else {
             pathImg= "File:src/images/img_"+this.pos+".jpg";
