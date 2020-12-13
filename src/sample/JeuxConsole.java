@@ -37,7 +37,7 @@ public class JeuxConsole extends Jeux{
                 break;
 
             case ('Q'):
-                posD= this.posVide--;
+                posD= this.posVide-1;
                 break;
 
             case ('S'):
@@ -45,23 +45,14 @@ public class JeuxConsole extends Jeux{
                 break;
 
             case('D'):
-                posD=this.posVide++;
+                posD=this.posVide+1;
                 break;
         }
         //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
-            System.out.println("mouvement possible :"+mouvementPossible(this.posVide));
-            System.out.println("position deplacement :"+posD);
-            System.out.println("position vide :"+posVide);
-            //System.out.println(this.grille.toString());
-
-
             Collections.swap(this.grille, posD, posVide);
-            //System.out.println(this.grille);
             int[] res = {posD, posVide};
-            System.out.println("position res :"+res);
             this.posVide=posD;
-            System.out.println("position vide :"+posVide);
             nbshots++;
             return res;
         }
