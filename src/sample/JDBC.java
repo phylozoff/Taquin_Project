@@ -73,7 +73,6 @@ public class JDBC {
             e.printStackTrace();
             return false;
         }
-        System.out.println("test");
         PreparedStatement s3 =connexion.prepareStatement(ADD_AJOUER);
         s3.setInt(1,idJ);
         s3.setInt(2,idP);

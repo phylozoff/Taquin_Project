@@ -123,6 +123,7 @@ public class Controller{
     public void bouger(int[] tab){
         int[] tabPos = tab;
         String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+        System.out.println(s);
         ImageView iv = null;
         if(s!=null){iv=new ImageView(new Image(s));}
         System.out.println(tabPos[0]+"/"+tabPos[1]);

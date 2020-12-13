@@ -17,6 +17,8 @@ public class TraitementImg {
      */
 
     public static void decoupe(String path, int nbPart) throws IOException {
+        String ImgNull= "src/images/img_null.jpg";
+
         File file = new File(path);
         System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
         BufferedImage img = ImageIO.read(file);
@@ -28,6 +30,7 @@ public class TraitementImg {
         int num= 0;
         h = hPart*RnbPart;
         w = wPart*RnbPart;
+
         for (int x = 0 ; x< w; x+=wPart){
 
            for (int y = 0; y< h; y+=hPart){
@@ -45,5 +48,15 @@ public class TraitementImg {
            }
         }
 
+        BufferedImage part = img.getSubimage(0,0,wPart,hPart);
+        String sousImg= "src/images/img_null.jpg";
+        File f = new File(sousImg);
+
+        if (f.createNewFile()) {
+            System.out.println("File created: " + f.getName());
+        }
+        ImageIO.write(part, "JPG", f);
+
     }
+
 }
