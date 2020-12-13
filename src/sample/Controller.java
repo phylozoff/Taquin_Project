@@ -125,6 +125,7 @@ public class Controller{
         String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
         System.out.println(s);
         ImageView iv = null;
+        System.out.println(s);
         if(s!=null){iv=new ImageView(new Image(s));}
         System.out.println(tabPos[0]+"/"+tabPos[1]);
         grille.getChildren().add(tabPos[0], iv);
@@ -251,11 +252,9 @@ public class Controller{
                     for (int k = 0; k < taille; k++) {
                         s = j2.getGrille().get(nombre).getPathImg();
                         nombre++;
-                        if (s != null) {
-                            iv = new ImageView(new Image(s));
-                            GridPane.setConstraints(iv, i, k);
-                            grille.getChildren().add(iv);
-                        }
+                        iv = new ImageView(new Image(s));
+                        GridPane.setConstraints(iv, i, k);
+                        grille.getChildren().add(iv);
                     }
                 }
     }
@@ -307,10 +306,8 @@ public class Controller{
             for(int k=0; k<taille;k++) {
                 s = j3.getGrille().get(nombre).getPathImg();
                 nombre++;
-                if(s!=null) {
-                    iv = new ImageView(new Image(s));
-                    grille.add(iv,i,k);
-                }
+                iv = new ImageView(new Image(s));
+                grille.add(iv,i,k);
             }
         }
     }

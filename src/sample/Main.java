@@ -49,10 +49,8 @@ public class Main extends Application {
             for(int k=0; k<taille;k++) {
                 s = j.getGrille().get(nombre).getPathImg();
                 nombre++;
-                if(s!=null) {
-                    iv = new ImageView(new Image(s));
-                    grid.add(iv,i,k);
-                }
+                iv = new ImageView(new Image(s));
+                grid.add(iv,i,k);
             }
         }
         primaryStage.setScene(scene);
