@@ -1,8 +1,8 @@
 {
-    "host": "localhost",
+    "host": "178.128.145.238",
     "port": 3306,
     "bdd": "taquin",
-    "user": "root",
-    "pass": ""
+    "user": "taquin",
+    "pass": "ProjetTaquin20@"
 
 }
