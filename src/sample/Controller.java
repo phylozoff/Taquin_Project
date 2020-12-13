@@ -122,24 +122,28 @@ public class Controller{
     @FXML
     public void bouger(int[] tab){
         int[] tabPos = tab;
-        String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
-        System.out.println(s);
-        ImageView iv = null;
-        System.out.println(s);
-        if(s!=null){iv=new ImageView(new Image(s));}
-        System.out.println(tabPos[0]+"/"+tabPos[1]);
-        grille.getChildren().add(tabPos[0], iv);
-        grille.getChildren().remove(tabPos[1]);
-        nbshots.setText(""+Main.getJ().getNbshots());
-        if(progress.getProgress()<=1){progress.setProgress(Main.getJ().getNbshots()*0.02);}
-        if(progress.getProgress()>0.3&&progress.getProgress()<0.6){
-            progress.setStyle("-fx-accent : orange");
-        }
-        if(progress.getProgress()>=0.6){
-            progress.setStyle("-fx-accent : red");
-        }
-        if(progress.getProgress()==1){
-            progress.setStyle("-fx-accent : black");
+        if(tabPos!=null) {
+            String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
+            String s1 = Main.getJ().getGrille().get(tabPos[1]).getPathImg();
+            System.out.println(s + "//////" + s1);
+            ImageView iv = new ImageView(new Image(s));
+            ImageView iv1 = new ImageView(new Image(s1));
+            System.out.println(tabPos[0] + "/" + tabPos[1]);
+            grille.getChildren().add(tabPos[0], iv);
+            grille.getChildren().add(tabPos[1], iv1);
+            nbshots.setText("" + Main.getJ().getNbshots());
+            if (progress.getProgress() <= 1) {
+                progress.setProgress(Main.getJ().getNbshots() * 0.02);
+            }
+            if (progress.getProgress() > 0.3 && progress.getProgress() < 0.6) {
+                progress.setStyle("-fx-accent : orange");
+            }
+            if (progress.getProgress() >= 0.6) {
+                progress.setStyle("-fx-accent : red");
+            }
+            if (progress.getProgress() == 1) {
+                progress.setStyle("-fx-accent : black");
+            }
         }
     }
 
