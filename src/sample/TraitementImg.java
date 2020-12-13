@@ -47,8 +47,9 @@ public class TraitementImg {
                //System.out.println("x: "+x +"  ; y: "+y);
            }
         }
-
-        BufferedImage part = img.getSubimage(0,0,wPart,hPart);
+        File filenull = new File(ImgNull);
+        BufferedImage imgnull = ImageIO.read(file);
+        BufferedImage part = imgnull.getSubimage(0,0,wPart,hPart);
         String sousImg= "src/images/img_null_d.jpg";
         File f = new File(sousImg);
 
