@@ -291,6 +291,7 @@ public class Controller{
     }
 
     public void changerImage(String path) throws IOException {
+       grille.getChildren().clear();
        JeuxConsole j3 = null;
        if(neuf.isSelected()){j3 = new JeuxConsole(path, 9);}
        if(seize.isSelected()){j3 = new JeuxConsole(path, 16);}
