@@ -170,9 +170,9 @@ public class Controller{
     }
 
     public void restart(){
+       if(!play.getText().equals("Start")){stop();}
         play.setSelected(false);
         play.setText("Start");
-        stop();
     }
 
     @FXML
