@@ -46,7 +46,7 @@ public class Jeux implements Serializable {
 
     }
     private void determinerCaseVide(){
-        this.posVide=this.NbCase-1;
+        this.posVide=0;
         this.grille.set(this.posVide, new Case(0));
     }
 
@@ -56,8 +56,9 @@ public class Jeux implements Serializable {
     }
 
     private void init(){
+        determinerCaseVide();
             melanger();
-            determinerCaseVide();
+
     }
 
     public void save(String path){

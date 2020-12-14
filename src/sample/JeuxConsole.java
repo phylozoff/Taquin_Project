@@ -1,7 +1,7 @@
 package sample;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.*;
 
 import static java.lang.Character.toUpperCase;
 
@@ -27,6 +27,15 @@ public class JeuxConsole extends Jeux{
         c= toUpperCase(c);
         return (c == 'Z' || c== 'Q' || c=='S' || c=='D')? c: null;
     }
+    public int[] move(int i){
+        if(i!=-1){
+            Collections.swap(this.grille, i, posVide);
+            int[] res = {i, posVide};
+            return res;
+        }
+        return null;
+    }
+
     public int[] move(char d){
         System.out.println(posVide);
         int posD=-1;
@@ -50,6 +59,7 @@ public class JeuxConsole extends Jeux{
         }
         //inverser les deux position
         if (mouvementPossible(this.posVide).contains(posD)){
+
             Collections.swap(this.grille, posD, posVide);
             int[] res = {posD, posVide};
             this.posVide=posD;
@@ -58,6 +68,45 @@ public class JeuxConsole extends Jeux{
         }
 
         return null;
+    }
+
+    public int[] pos2D(int i){
+        return new int[]{(int) i % (int) Math.sqrt(this.NbCase),(int) i / (int) Math.sqrt(this.NbCase)};
+    }
+    public int resolution() throws InterruptedException {
+        //Map<Integer, Integer> disman= new TreeMap<Integer, Integer>();
+        int n = this.posVide;
+        ArrayList<Case> g= this.grille;
+        if (!estResolue(g)){
+
+            ArrayList<Integer> c=mouvementPossible(n);
+            int minPos = 1000000;
+            int minDist = 10000000;
+            for (Integer i : c){
+                int posFi=this.grille.get(i).getPos();
+                int distanceMan= Math.abs(pos2D(i)[0]-pos2D(posFi)[0])+Math.abs(pos2D(i)[1]-pos2D(posFi)[1]);
+                if (minDist>distanceMan && distanceMan!=0){
+                    minPos=i;
+                    minDist=distanceMan;
+                }
+                //disman.put(i, distanceMan);
+            }
+            return minPos;
+        }
+        return -1;
+    }
+    public boolean estResolue(ArrayList<Case> g){
+        for (int i=0; i<this.NbCase; i++){
+            if(g.get(i).getPos()!=i){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) throws IOException, InterruptedException {
+        JeuxConsole j = new JeuxConsole("src/sample/img.jpg", 16);
+        j.resolution();
+
     }
 
 
