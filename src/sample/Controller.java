@@ -12,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,22 +49,25 @@ public class Controller{
     @FXML
     private ProgressBar progress;
 
-   public void sayHelp(ActionEvent actionEvent) {
+    public void chargerPopUp(String t, String instruction){
         Stage popUpStage = new Stage();
         Parent root = null;
-        popUpStage.setTitle("Help");
+        popUpStage.setTitle(t);
         try {
-            root = FXMLLoader.load(getClass().getResource("IA.fxml"));
+            root = FXMLLoader.load(getClass().getResource("popUp.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Text s = new Text("Cliquez sur [IA] pour vous aider à résoudre le jeu.");
         Scene sc = new Scene(root);
-        TextFlow txt = (TextFlow) sc.lookup("#instructions");
-        txt.getChildren().add(s);
+        Label instructions = (Label) sc.lookup("#instructions");
+        instructions.setText(instruction);
         popUpStage.setScene(sc);
         popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
         popUpStage.showAndWait();
+    }
+
+    public void sayHelp(ActionEvent actionEvent) {
+        chargerPopUp("Help", "Cliquez sur [IA] \n pour vous aider à résoudre le jeu.");
     }
 
     public void hyperLink(ActionEvent actionEvent) {
@@ -85,21 +86,7 @@ public class Controller{
            if(debut){
                if(pseudo.getText().equals("")){
                    pseudo.setStyle("-fx-border-color : red");
-                   Stage popUpStage = new Stage();
-                   Parent root = null;
-                   popUpStage.setTitle("[!]");
-                   try {
-                       root = FXMLLoader.load(getClass().getResource("pseudoPopUp.fxml"));
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-                   Text s = new Text("Veuillez entrer votre pseudonyme dans la case en haut à droite.");
-                   Scene sc = new Scene(root);
-                   TextFlow txt = (TextFlow) sc.lookup("#instructions");
-                   txt.getChildren().add(s);
-                   popUpStage.setScene(sc);
-                   popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
-                   popUpStage.showAndWait();
+                   chargerPopUp("[!]", "Veuillez entrer votre pseudonyme \n dans la case en haut à droite.");
                }
                play.setText("Stop");
                start();
@@ -163,8 +150,8 @@ public class Controller{
                 progress.setStyle("-fx-accent : black");
             }
             if(Main.getJ().estResolue(Main.getJ().getGrille())){
-                System.out.println("jeu terminé");
-                changerImage("src/sample/img.jpg");
+                chargerPopUp("Congratulations", "Félicitation ! Vous avez terminé le jeu !");
+                chargerImage("src/sample/img.jpg");
             };
         }
     }
@@ -173,6 +160,9 @@ public class Controller{
        if(!play.getText().equals("Start")){stop();}
         play.setSelected(false);
         play.setText("Start");
+        if(pseudo.getText().equals("")) {
+            debut = true;
+        }
     }
 
     @FXML
@@ -316,14 +306,15 @@ public class Controller{
                f = fc.getSelectedFile();
            }
            if (f != null) {
-               changerImage(f.getPath());
+               chargerImage(f.getPath());
            }
        }
-       if(photo1.isSelected()){changerImage("src/sample/img.jpg");}
+       if(photo1.isSelected()){
+           chargerImage("src/sample/img.jpg");}
        if(photo2.isSelected()){}
     }
 
-    public void changerImage(String path) throws IOException {
+    public void chargerImage(String path) throws IOException {
        grille.getChildren().clear();
        JeuxConsole j3 = null;
        if(neuf.isSelected()){j3 = new JeuxConsole(path, 9);}
