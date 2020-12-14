@@ -104,14 +104,13 @@ public class Controller{
     }
 
     @FXML
-    public void bouger(int[] tab) throws IOException {
+    public void bouger(int[] tab) throws IOException, SQLException {
         int[] tabPos = tab;
         if(tabPos!=null) {
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
             String s1 = Main.getJ().getGrille().get(tabPos[1]).getPathImg();
             ImageView iv = new ImageView(new Image(s));
             ImageView iv1 = new ImageView(new Image(s1));
-            System.out.println(tabPos[0]+"/"+tabPos[1]);
             int length = grille.getColumnCount();
             int x =0, y =0, x1=0, y1=0;
             for(int i=2; i<=length;i++){
@@ -150,6 +149,8 @@ public class Controller{
                 progress.setStyle("-fx-accent : black");
             }
             if(Main.getJ().estResolue(Main.getJ().getGrille())){
+                JDBC.getConnexion();
+                JDBC.addPartie(pseudo.getText(), Main.getJ().getNbshots());
                 chargerPopUp("Congratulations", "Félicitation ! Vous avez terminé le jeu !");
                 chargerImage("src/sample/img.jpg");
             };
@@ -166,28 +167,28 @@ public class Controller{
     }
 
     @FXML
-    public void up(ActionEvent actionEvent) throws IOException {
+    public void up(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('Z');
             bouger(tabPos);
         }
     }
 
-    public void left(ActionEvent actionEvent) throws IOException {
+    public void left(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()){
             int[] tabPos = Main.getJ().move('Q');
             bouger(tabPos);
         }
     }
 
-    public void right(ActionEvent actionEvent) throws IOException {
+    public void right(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('D');
             bouger(tabPos);
         }
     }
 
-    public void down(ActionEvent actionEvent) throws IOException {
+    public void down(ActionEvent actionEvent) throws IOException, SQLException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().move('S');
            bouger(tabPos);
@@ -343,10 +344,11 @@ public class Controller{
 
     public void rank(ActionEvent actionevent) throws SQLException {
         Stage popUpStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("rank.fxml"));
         Parent root = null;
         popUpStage.setTitle("Stats");
         try {
-            root = FXMLLoader.load(getClass().getResource("rank.fxml"));
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -357,22 +359,21 @@ public class Controller{
 
         tableView.getItems().addAll(tm.keySet());
 
-        TableColumn<String, String> keyColumn = new TableColumn<>("key");
+        TableColumn<String, String> keyColumn = new TableColumn<>("Pseudo");
         keyColumn.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue()));
-        TableColumn<String, String> valueColumn = new TableColumn<>("value");
+        TableColumn<String, String> valueColumn = new TableColumn<>("Score");
         valueColumn.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue()));
 
         tableView.getColumns().addAll(keyColumn, valueColumn);
         Scene sc = new Scene(root);
         Pane pane2 = (Pane) sc.lookup("#pane2");
         pane2.getChildren().add(tableView);
-        pane2.getChildren().add(tableView);
         popUpStage.setScene(sc);
         popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
         popUpStage.showAndWait();
     }
 
-    public void resolution(ActionEvent actionEvent) throws InterruptedException, IOException {
+    public void resolution(ActionEvent actionEvent) throws InterruptedException, IOException, SQLException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().moveIa(Main.getJ().resolution());
            bouger(tabPos);
