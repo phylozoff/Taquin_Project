@@ -150,7 +150,7 @@ public class Controller{
             }
             if(Main.getJ().estResolue(Main.getJ().getGrille())){
                 JDBC.getConnexion();
-                JDBC.addPartie(pseudo.getText(), ((int) Main.getJ().getNbshots()/timerTask.getSeconds()));
+                JDBC.addPartie(pseudo.getText(), Main.getJ().getNbshots()*timerTask.getSeconds());
                 chargerPopUp("Congratulations", "Félicitation ! Vous avez terminé le jeu !");
                 chargerImage("src/sample/img.jpg");
             };
