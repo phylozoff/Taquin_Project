@@ -371,6 +371,13 @@ public class Controller{
         popUpStage.showAndWait();
     }
 
+    public void resolution(ActionEvent actionEvent) throws InterruptedException {
+       if(play.isSelected()) {
+           int[] tabPos = Main.getJ().moveIa(Main.getJ().resolution());
+           bouger(tabPos);
+       }
+    }
+
 
     private class Task extends TimerTask {
 

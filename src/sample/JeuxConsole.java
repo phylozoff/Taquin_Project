@@ -27,7 +27,7 @@ public class JeuxConsole extends Jeux{
         c= toUpperCase(c);
         return (c == 'Z' || c== 'Q' || c=='S' || c=='D')? c: null;
     }
-    public int[] move(int i){
+    public int[] moveIa(int i){
         if(i!=-1){
             Collections.swap(this.grille, i, posVide);
             int[] res = {i, posVide};

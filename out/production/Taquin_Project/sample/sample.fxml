@@ -194,7 +194,7 @@
             </VBox>
          </children>
       </VBox>
-      <Button alignment="CENTER" layoutX="562.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="IA">
+      <Button alignment="CENTER" layoutX="562.0" layoutY="346.0" mnemonicParsing="false" onAction="#resolution" prefHeight="25.0" prefWidth="31.0" text="IA">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font>
