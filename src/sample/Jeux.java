@@ -48,10 +48,7 @@ public class Jeux implements Serializable {
 
 
     private void melanger(){
-        System.out.println(this.grille);
         Collections.shuffle(this.grille);
-        System.out.println(this.grille);
-
         int i=0;
         for (Case c : this.grille){
             if(c.getPos()==0){

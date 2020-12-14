@@ -28,11 +28,13 @@ public class JeuxConsole extends Jeux{
         return (c == 'Z' || c== 'Q' || c=='S' || c=='D')? c: null;
     }
     public int[] moveIa(int i){
+        System.out.println("moveIa"+i);
         if(i!=-1){
-            System.out.println(posVide);
-            System.out.println(i);
+            System.out.println("posvideIA:"+posVide);
+            System.out.println("move possible :"+i);
             Collections.swap(this.grille, i, posVide);
             int[] res = {i, posVide};
+            this.posVide=i;
             return res;
         }
         return null;
@@ -82,12 +84,13 @@ public class JeuxConsole extends Jeux{
         if (!estResolue(this.grille)){
 
             ArrayList<Integer> c=mouvementPossible(n);
+            System.out.println(c.toString());
             int minPos = 1000000;
             int minDist = 10000000;
             for (Integer i : c){
                 int posFi=this.grille.get(i).getPos();
                 int distanceMan= Math.abs(pos2D(i)[0]-pos2D(posFi)[0])+Math.abs(pos2D(i)[1]-pos2D(posFi)[1]);
-                if (minDist>distanceMan && distanceMan!=0){
+                if (minDist>distanceMan && distanceMan!=1){
                     minPos=i;
                     minDist=distanceMan;
                 }
