@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class JDBC {
     private static Boolean connected = false;
     private static Connection connexion= null;
-    private static final String TOP= "select pseudo, score from joueur inner join aJouer aJ on joueur.id = aJ.idJ inner join partie p on aJ.idP = p.id order by score DESC limit 3;";
+    private static final String TOP= "select pseudo, score from joueur inner join ajouer aJ on joueur.id = aJ.idJ inner join partie p on aJ.idP = p.id order by score DESC limit 3;";
     private static final String ADD_PARTIE = "insert into partie(score, date) values (?,?);";
     private static final String ADD_JOUEUR = "insert into joueur(pseudo) values  (?)";
     private static final String JOUEUR = "select * from joueur where pseudo=?";
