@@ -47,8 +47,6 @@ public class Controller{
     @FXML
     private Pane pane;
     @FXML
-    private AnchorPane ranking;
-    @FXML
     private RadioButton neuf, seize, vingtcinq, trentesix, photo1, photo2, photo3;
     @FXML
     private TextField pseudo;
@@ -155,7 +153,7 @@ public class Controller{
             grille.add(iv1, x1, y1);
             nbshots.setText("" + Main.getJ().getNbshots());
             if (progress.getProgress() <= 1) {
-                progress.setProgress(Main.getJ().getNbshots() * 0.02);
+                progress.setProgress(Main.getJ().getNbshots() * 0.01);
             }
             if (progress.getProgress() > 0.3 && progress.getProgress() < 0.6) {
                 progress.setStyle("-fx-accent : orange");
@@ -353,6 +351,7 @@ public class Controller{
         }
 
         TableView<String> tableView = new TableView();
+        JDBC.getConnexion();
         TreeMap<String, Integer> tm = JDBC.classement();
 
         tableView.getItems().addAll(tm.keySet());
@@ -364,7 +363,9 @@ public class Controller{
 
         tableView.getColumns().addAll(keyColumn, valueColumn);
         Scene sc = new Scene(root);
-        ranking.getChildren().add(tableView);
+        Pane pane2 = (Pane) sc.lookup("#pane2");
+        pane2.getChildren().add(tableView);
+        pane2.getChildren().add(tableView);
         popUpStage.setScene(sc);
         popUpStage.initModality(Modality.APPLICATION_MODAL);    // popup
         popUpStage.showAndWait();
