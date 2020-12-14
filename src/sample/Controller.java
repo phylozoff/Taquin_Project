@@ -150,7 +150,7 @@ public class Controller{
             }
             if(Main.getJ().estResolue(Main.getJ().getGrille())){
                 JDBC.getConnexion();
-                JDBC.addPartie(pseudo.getText(), Main.getJ().getNbshots());
+                JDBC.addPartie(pseudo.getText(), ((int) Main.getJ().getNbshots()/timerTask.getSeconds()));
                 chargerPopUp("Congratulations", "Félicitation ! Vous avez terminé le jeu !");
                 chargerImage("src/sample/img.jpg");
             };
@@ -384,6 +384,12 @@ public class Controller{
     private class Task extends TimerTask {
 
         final long start;
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        private int seconds = 0;
         private boolean running;
         public Task() {
             this(System.currentTimeMillis());
@@ -410,7 +416,7 @@ public class Controller{
         public void run() {
             running=true;
             final long time = System.currentTimeMillis() - start;
-            final int seconds = (int) (time / 1000);
+            seconds = (int) (time / 1000);
             final String message = String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
             Platform.runLater(new Runnable() {
                 public void run() {
