@@ -36,28 +36,35 @@ public class Jeux implements Serializable {
             this.pathImg= "./src/sample/img.jpg";
             TraitementImg.decoupe(this.pathImg, this.NbCase);
         }
-        int nb= 1;
+
         int sq = (int) Math.sqrt(this.NbCase);
-        for (int i= 1 ; i<=nbCase; i++){
-            this.grille.add(new Case(nb));
-            nb++;
+        for (int i= 0 ; i<nbCase; i++){
+            this.grille.add(new Case(i));
+
         }
         this.init();
 
     }
-    private void determinerCaseVide(){
-        this.posVide=0;
-        this.grille.set(this.posVide, new Case(0));
-    }
+
 
     private void melanger(){
-        Case c= this.grille.get(0);
+        System.out.println(this.grille);
         Collections.shuffle(this.grille);
-        this.posVide= this.grille.indexOf(c);
+        System.out.println(this.grille);
+
+        int i=0;
+        for (Case c : this.grille){
+            if(c.getPos()==0){
+                this.posVide=i;
+                break;
+            }
+            i++;
+        }
+        System.out.println(this.posVide);
     }
 
     private void init(){
-        determinerCaseVide();
+
             melanger();
 
     }

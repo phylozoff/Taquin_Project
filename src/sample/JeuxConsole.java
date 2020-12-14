@@ -29,6 +29,8 @@ public class JeuxConsole extends Jeux{
     }
     public int[] moveIa(int i){
         if(i!=-1){
+            System.out.println(posVide);
+            System.out.println(i);
             Collections.swap(this.grille, i, posVide);
             int[] res = {i, posVide};
             return res;
@@ -76,8 +78,8 @@ public class JeuxConsole extends Jeux{
     public int resolution() throws InterruptedException {
         //Map<Integer, Integer> disman= new TreeMap<Integer, Integer>();
         int n = this.posVide;
-        ArrayList<Case> g= this.grille;
-        if (!estResolue(g)){
+
+        if (!estResolue(this.grille)){
 
             ArrayList<Integer> c=mouvementPossible(n);
             int minPos = 1000000;
