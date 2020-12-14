@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
@@ -97,13 +98,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton fx:id="neuf" mnemonicParsing="false" onAction="#generateGrid" text="9">
+                  <RadioButton fx:id="neuf" mnemonicParsing="false" onAction="#generateGrid" text="3x3">
                      <toggleGroup>
                         <ToggleGroup fx:id="grilleTaille" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="seize" mnemonicParsing="false" onAction="#generateGrid" selected="true" text="16" toggleGroup="$grilleTaille" GridPane.columnIndex="1" />
-                  <RadioButton fx:id="vingtcinq" mnemonicParsing="false" onAction="#generateGrid" text="25" toggleGroup="$grilleTaille" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="trentesix" mnemonicParsing="false" onAction="#generateGrid" text="36" toggleGroup="$grilleTaille" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="seize" mnemonicParsing="false" onAction="#generateGrid" selected="true" text="4x4" toggleGroup="$grilleTaille" GridPane.columnIndex="1" />
+                  <RadioButton fx:id="vingtcinq" mnemonicParsing="false" onAction="#generateGrid" text="5x5" toggleGroup="$grilleTaille" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="trentesix" mnemonicParsing="false" onAction="#generateGrid" text="6x6" toggleGroup="$grilleTaille" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />

@@ -30,6 +30,7 @@ import java.util.TreeMap;
 
 public class Controller{
 
+
     private Timer timer = new Timer();
     private Task timerTask;
     private javax.swing.Timer blinkTask;
@@ -49,6 +50,11 @@ public class Controller{
     @FXML
     private ProgressBar progress;
 
+    /**
+     * methode d'affichage d'une fenêtre pop-up avec un titre et une phrase d'instruction
+     * @param t
+     * @param instruction
+     */
     public void chargerPopUp(String t, String instruction){
         Stage popUpStage = new Stage();
         Parent root = null;
@@ -66,10 +72,18 @@ public class Controller{
         popUpStage.showAndWait();
     }
 
+    /**
+     * affichage de la fenêtre pop-up help
+     * @param actionEvent
+     */
     public void sayHelp(ActionEvent actionEvent) {
         chargerPopUp("Help", "Cliquez sur [IA] \n pour vous aider à résoudre le jeu.");
     }
 
+    /**
+     * affichage de la fenêtre Wikipedia
+     * @param actionEvent
+     */
     public void hyperLink(ActionEvent actionEvent) {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("What's Taquin ?");
@@ -81,6 +95,12 @@ public class Controller{
         primaryStage.show();
     }
 
+    /**
+     * methode de lancement du jeu
+     * vérifie si le pseudo a été rentré
+     * @param actionEvent
+     * @throws InterruptedException
+     */
     @FXML
     public void playTaquin(ActionEvent actionEvent) throws InterruptedException {
            if(debut){
@@ -103,6 +123,14 @@ public class Controller{
 
     }
 
+    /**
+     * methode de déplacement des cases
+     * vérifie si toutes les cases sont dans le bon ordre
+     * et si oui, réinitialise le jeu
+     * @param tab
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     public void bouger(int[] tab) throws IOException, SQLException {
         int[] tabPos = tab;
@@ -157,6 +185,9 @@ public class Controller{
         }
     }
 
+    /**
+     * methode de réinitialisation du jeu
+     */
     public void restart(){
        if(!play.getText().equals("Start")){stop();}
         play.setSelected(false);
@@ -166,6 +197,12 @@ public class Controller{
         }
     }
 
+    /**
+     * methode de déplacement vers le haut
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     public void up(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()) {
@@ -174,6 +211,12 @@ public class Controller{
         }
     }
 
+    /**
+     * methode de déplacement vers la gauche
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void left(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()){
             int[] tabPos = Main.getJ().move('Q');
@@ -181,6 +224,12 @@ public class Controller{
         }
     }
 
+    /**
+     * methode de déplacement vers la droite
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void right(ActionEvent actionEvent) throws IOException, SQLException {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('D');
@@ -188,6 +237,12 @@ public class Controller{
         }
     }
 
+    /**
+     * methode de déplacement vers le bas
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void down(ActionEvent actionEvent) throws IOException, SQLException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().move('S');
@@ -195,11 +250,20 @@ public class Controller{
        }
     }
 
+    /**
+     * methode de sauvegarde de la partie
+     * @param actionEvent
+     */
     public void save(ActionEvent actionEvent) {
         stop();
         Main.getJ().save("Saved");
     }
 
+    /**
+     * methode qui génère une nouvelle grille d'une taille sélectionnée
+     * @param actionEvent
+     * @throws IOException
+     */
     @FXML
     public void generateGrid(ActionEvent actionEvent) throws IOException {
        grille.getChildren().clear();
@@ -284,19 +348,36 @@ public class Controller{
     }
 
 
+    /**
+     * methode qui applique le theme négatif
+     * @param actionEvent
+     */
     @FXML
     public void negative(ActionEvent actionEvent) {
         pane.setBlendMode(BlendMode.DIFFERENCE);
     }
 
+    /**
+     * methode qui applique le theme rose
+     * @param actionEvent
+     */
     public void pink(ActionEvent actionEvent) {
         pane.setBlendMode(BlendMode.GREEN);
     }
 
+    /**
+     * methode qui applique le theme par default
+     * @param actionEvent
+     */
     public void bauhaus(ActionEvent actionEvent) {
         pane.setBlendMode(BlendMode.SRC_OVER);
     }
 
+    /**
+     * methode qui modifie l'image de la grille
+     * @param actionEvent
+     * @throws IOException
+     */
     public void download(ActionEvent actionEvent) throws IOException {
        if(photo3.isSelected()) {
            JFileChooser fc = new JFileChooser();
@@ -315,6 +396,11 @@ public class Controller{
        if(photo2.isSelected()){}
     }
 
+    /**
+     * methode qui charge la nouvelle image à appliquer dans la grille
+     * @param path
+     * @throws IOException
+     */
     public void chargerImage(String path) throws IOException {
        grille.getChildren().clear();
        JeuxConsole j3 = null;
@@ -338,10 +424,19 @@ public class Controller{
         restart();
     }
 
+    /**
+     * methode qui aaplique un encadré rougé à la case contenant le pseudo
+     * @param keyEvent
+     */
     public void pseudoChanged(KeyEvent keyEvent) {
         pseudo.setStyle("-fx-border-color : green");
     }
 
+    /**
+     * methode qui affiche la fenêtre du classement
+     * @param actionevent
+     * @throws SQLException
+     */
     public void rank(ActionEvent actionevent) throws SQLException {
         Stage popUpStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("rank.fxml"));
@@ -373,6 +468,13 @@ public class Controller{
         popUpStage.showAndWait();
     }
 
+    /**
+     * methode qui appelle l'IA
+     * @param actionEvent
+     * @throws InterruptedException
+     * @throws IOException
+     * @throws SQLException
+     */
     public void resolution(ActionEvent actionEvent) throws InterruptedException, IOException, SQLException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().moveIa(Main.getJ().resolution());
@@ -381,6 +483,9 @@ public class Controller{
     }
 
 
+    /**
+     * chronomètre
+     */
     private class Task extends TimerTask {
 
         final long start;
