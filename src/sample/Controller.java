@@ -3,9 +3,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -119,7 +117,7 @@ public class Controller{
     }
 
     @FXML
-    public void bouger(int[] tab){
+    public void bouger(int[] tab) throws IOException {
         int[] tabPos = tab;
         if(tabPos!=null) {
             String s = Main.getJ().getGrille().get(tabPos[0]).getPathImg();
@@ -164,32 +162,42 @@ public class Controller{
             if (progress.getProgress() == 1) {
                 progress.setStyle("-fx-accent : black");
             }
+            if(Main.getJ().estResolue(Main.getJ().getGrille())){
+                System.out.println("jeu terminé");
+                changerImage("src/sample/img.jpg");
+            };
         }
     }
 
+    public void restart(){
+        play.setSelected(false);
+        play.setText("Start");
+        stop();
+    }
+
     @FXML
-    public void up(ActionEvent actionEvent) {
+    public void up(ActionEvent actionEvent) throws IOException {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('Z');
             bouger(tabPos);
         }
     }
 
-    public void left(ActionEvent actionEvent) {
+    public void left(ActionEvent actionEvent) throws IOException {
         if(play.isSelected()){
             int[] tabPos = Main.getJ().move('Q');
             bouger(tabPos);
         }
     }
 
-    public void right(ActionEvent actionEvent) {
+    public void right(ActionEvent actionEvent) throws IOException {
         if(play.isSelected()) {
             int[] tabPos = Main.getJ().move('D');
             bouger(tabPos);
         }
     }
 
-    public void down(ActionEvent actionEvent) {
+    public void down(ActionEvent actionEvent) throws IOException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().move('S');
            bouger(tabPos);
@@ -281,6 +289,7 @@ public class Controller{
                         grille.getChildren().add(iv);
                     }
                 }
+                restart();
     }
 
 
@@ -334,6 +343,7 @@ public class Controller{
                 grille.add(iv,i,k);
             }
         }
+        restart();
     }
 
     public void pseudoChanged(KeyEvent keyEvent) {
@@ -371,7 +381,7 @@ public class Controller{
         popUpStage.showAndWait();
     }
 
-    public void resolution(ActionEvent actionEvent) throws InterruptedException {
+    public void resolution(ActionEvent actionEvent) throws InterruptedException, IOException {
        if(play.isSelected()) {
            int[] tabPos = Main.getJ().moveIa(Main.getJ().resolution());
            bouger(tabPos);
