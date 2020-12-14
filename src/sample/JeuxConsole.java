@@ -70,7 +70,7 @@ public class JeuxConsole extends Jeux{
         return null;
     }
 
-    public int[] pos2D(int i){
+    private int[] pos2D(int i){
         return new int[]{(int) i % (int) Math.sqrt(this.NbCase),(int) i / (int) Math.sqrt(this.NbCase)};
     }
     public int resolution() throws InterruptedException {

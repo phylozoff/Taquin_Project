@@ -51,8 +51,9 @@ public class Jeux implements Serializable {
     }
 
     private void melanger(){
+        Case c= this.grille.get(0);
         Collections.shuffle(this.grille);
-        //this.posVide= this.grille.indexOf(new Case(0));
+        this.posVide= this.grille.indexOf(c);
     }
 
     private void init(){
