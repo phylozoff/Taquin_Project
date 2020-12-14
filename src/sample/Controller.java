@@ -346,7 +346,7 @@ public class Controller{
         Stage popUpStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("rank.fxml"));
         Parent root = null;
-        popUpStage.setTitle("Stats");
+        popUpStage.setTitle("Classement");
         try {
             root = loader.load();
         } catch (IOException e) {
