@@ -19,9 +19,17 @@ public class JDBC {
     private static final String JOUEUR = "select * from joueur where pseudo=?";
     private static final String ADD_AJOUER= "insert into ajouer values(?,?)";
 
+    /**
+     * Constructeur privé pour jdbc
+     */
     private JDBC() {
     }
 
+    /**
+     * se connecte à la bdd et reccupere les 3 scores
+     * @return TreeMap<String, Integer> pseudo, score
+     * @throws SQLException
+     */
     public static TreeMap<String, Integer> classement() throws SQLException {
         PreparedStatement s =connexion.prepareStatement(TOP);
         ResultSet rs= s.executeQuery();
@@ -33,6 +41,15 @@ public class JDBC {
         return res;
     }
 
+    /**
+     * Permet de verifier si le pseudo est contenu dans la base de donnée sinon l'ajoute
+     * ensuite ajoute un elemnt dans la table partie (score)
+     * et fait la liaison entre les deux dans la table ajouer
+     * @param pseudo pseudo joueur
+     * @param score score de la partie
+     * @return true si ne leve aucune exception false sinon
+     * @throws SQLException
+     */
     public static boolean addPartie(String pseudo, int score) throws SQLException {
         int idP=-1;
         int idJ=-1;
@@ -88,6 +105,10 @@ public class JDBC {
 
     }
 
+    /**
+     * permet de creer la connexion et de respecter le pattern sigleton
+     * @return Connection à la bdd ( configuration dans le fichier JDBCconfig.json
+     */
     public static Connection getConnexion()
     {
         if (connexion == null)

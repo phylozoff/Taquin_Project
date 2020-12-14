@@ -16,6 +16,12 @@ public class TraitementImg {
      * @throws IOException
      */
 
+    /**
+     * permet de decouper l'image en case de meme taille
+     * @param path lien de l'image a decouper
+     * @param nbPart nombre de case
+     * @throws IOException
+     */
     public static void decoupe(String path, int nbPart) throws IOException {
         String ImgNull= "src/sample/img_null.jpg";
 

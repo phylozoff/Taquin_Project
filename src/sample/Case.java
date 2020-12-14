@@ -2,22 +2,32 @@ package sample;
 
 public class Case {
     private int pos;
-    private int cost;
-    private int finalCost;
+    private String pathImg;
 
+    /**
+     * to string
+     * @return
+     */
     @Override
     public String toString() {
         return "Case{" +
                 "pos=" + pos +
-                '}';
+                ", pathImg :"+pathImg+'}';
     }
 
+    /**
+     * get path img
+     * @return chemin de l'image
+     */
     public String getPathImg() {
         return pathImg;
     }
 
-    private String pathImg;
 
+    /**
+     * constructeur de la case
+     * @param x position final
+     */
     public Case(int x) {
         this.pos = x;
         if (pos==0){
@@ -29,25 +39,14 @@ public class Case {
 
     }
 
+    /**
+     * get pos
+     * @return position final
+     */
     public int getPos() {
         return pos;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public void setFinalCost(int finalCost) {
-        this.finalCost = finalCost;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public int getFinalCost() {
-        return finalCost;
-    }
 }
 
 

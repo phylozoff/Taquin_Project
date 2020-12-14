@@ -12,10 +12,20 @@ public class Jeux implements Serializable {
     int posVide;
     private static final long serialVersionUID = 342836670337066099L;
 
+    /**
+     * Constructeur avec sauvegarde
+     * @param pathSave
+     */
     public Jeux(String pathSave) {
         load(pathSave);
     }
 
+    /**
+     * constructeur avec une image et un nombre de case
+     * @param pathImg chemin image
+     * @param nbCase  nombre de case total souhaité
+     * @throws IOException
+     */
     public Jeux(String pathImg, int nbCase) throws IOException {
         this.pathImg = pathImg;
 
@@ -46,8 +56,10 @@ public class Jeux implements Serializable {
 
     }
 
-
-    private void melanger(){
+    /**
+     * permet de melanger la grille et de definir la position de l'element vide
+     */
+    private void init(){
         Collections.shuffle(this.grille);
         int i=0;
         for (Case c : this.grille){
@@ -57,15 +69,13 @@ public class Jeux implements Serializable {
             }
             i++;
         }
-        System.out.println(this.posVide);
-    }
-
-    private void init(){
-
-            melanger();
 
     }
 
+    /**
+     * Permet la generation d'un fichier sauvegarde .taq
+     * @param path chemin souhaité de la sauvegarde
+     */
     public void save(String path){
 
         ObjectOutputStream obj = null;
@@ -89,6 +99,10 @@ public class Jeux implements Serializable {
         }
     }
 
+    /**
+     * Permet de charger une sauvegarde
+     * @param path
+     */
     public void load( String path){
         ObjectInputStream obj = null;
 
@@ -113,39 +127,74 @@ public class Jeux implements Serializable {
         }
     }
 
+    /**
+     * get chemin de l'image
+     * @return string
+     */
     public String getPathImg() {
         return pathImg;
     }
 
+    /**
+     * get grille
+     * @return ArrayList<Case>
+     */
     public ArrayList<Case> getGrille() {
         return grille;
     }
 
+    /**
+     * get nb case
+     * @return int
+     */
     public int getNbCase() {
         return NbCase;
     }
 
+    /**
+     * get position dans la grille de la case vide
+     * @return
+     */
     public int getPosVide() {
         return posVide;
     }
 
+    /**
+     * setter path img
+     * @param pathImg
+     */
     private void setPathImg(String pathImg) {
         this.pathImg = pathImg;
     }
 
+    /**
+     * setter grille
+     * @param grille
+     */
     private void setGrille(ArrayList<Case> grille) {
         this.grille = grille;
     }
 
+    /**
+     * setter nb case
+     * @param nbCase
+     */
     private void setNbCase(int nbCase) {
         NbCase = nbCase;
     }
 
+    /**
+     * setter pos vide
+     * @param posVide
+     */
     private void setPosVide(int posVide) {
         this.posVide = posVide;
     }
 
-    @Override
+    /**
+     * tostring jeux
+     * @return
+     */
     public String toString() {
         return "Jeux{" +
                 "pathImg='" + pathImg + '\'' +
@@ -155,6 +204,11 @@ public class Jeux implements Serializable {
                 '}';
     }
 
+    /**
+     * calcul de tout les mouvement possible a une position
+     * @param pos int
+     * @return ArrayList<Integer> de position de mouvement possible
+     */
     public ArrayList<Integer> mouvementPossible(int pos){
         int cote = (int) Math.sqrt(this.NbCase);
         // on verifie si on se trouve sur un cote
